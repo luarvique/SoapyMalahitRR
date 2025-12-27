@@ -1,8 +1,8 @@
-OBJS     = getid.o ../GPIO.o ../STM.o ../SPI.o
+OBJS     = malahit.o ../GPIO.o ../STM.o ../SPI.o
 CXXFLAGS = -O3 -I..
 LIBS     = -lgpiod
 
-getid: $(OBJS)
+malahit: $(OBJS)
 	$(CXX) -o $@ $(OBJS) $(LIBS)
 
 clean:
