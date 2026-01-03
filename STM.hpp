@@ -26,7 +26,6 @@ class STM: public SPI
     const char *getId();
     unsigned int getVersion() const;
 
-    unsigned int getFirmwareVersion() const;
     bool updateFirmware(const char *firmwareFile, bool force = false) const;
     bool getFirmware(const char *firmwareFile) const;
 

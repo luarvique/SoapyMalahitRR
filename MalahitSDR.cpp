@@ -22,6 +22,8 @@ MalahitSDR::MalahitSDR()
 {
   // Hard-reset attached hardware
   stmDevice.reset();
+  // Check firmware and update as necessary
+  stmDevice.updateFirmware("/usr/share/MalahitRR/" CURRENT_FIRMWARE);
   // Start STM receiver
   stmDevice.go();
   // Update hardware with initial settings
@@ -56,7 +58,8 @@ bool MalahitSDR::reportBattery(size_t samples)
   charger = ch!='\0';
 
   // Save STM chip ID and firmware version to a file
-  if(f = fopen(idPipeName, "wb"))
+  f = fopen(idPipeName, "wb");
+  if(f)
   {
     fprintf(f, "%s %.2f\n", id, ver / 100.0f);
     fclose(f);
@@ -315,7 +318,7 @@ void MalahitSDR::setGain(const int direction, const size_t channel, const double
 void MalahitSDR::setGain(const int direction, const size_t channel, const std::string &name, const double value)
 {
    SoapySDR::Range range = getGainRange(direction, channel, name);
-   int v = round(
+   unsigned int v = round(
      value<range.minimum()? range.minimum()
    : value>range.maximum()? range.maximum()
    : value);
@@ -422,7 +425,7 @@ SoapySDR::ArgInfoList MalahitSDR::getFrequencyArgsInfo(const int direction, cons
 
 void MalahitSDR::setSampleRate(const int direction, const size_t channel, const double rate)
 {
-  int newRate = (int)rate;
+  unsigned int newRate = (unsigned int)rate;
 
   // If given rate valid...
   if((newRate==defaultSampleRate) && (newRate!=sampleRate))
@@ -584,7 +587,7 @@ void MalahitSDR::writeSetting(const std::string &key, const std::string &value)
     updateRadio();
   }
 
-  if(key=="attenuator" && stoi(value)!=attenuator)
+  if(key=="attenuator" && (unsigned int)stoi(value)!=attenuator)
   {
     attenuator = std::max(0, std::min(30, stoi(value)));
     updateRadio();

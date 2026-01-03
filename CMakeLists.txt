@@ -2,7 +2,7 @@
 # Project setup -- only needed if device support is a stand-alone build
 # We recommend that the support module be built in-tree with the driver.
 ########################################################################
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.9)
 project(SoapyMalahitRR CXX)
 enable_testing()
 
@@ -43,6 +43,9 @@ if (NOT LIBGPIOD_FOUND)
 else()
     message(STATUS "Using libgpiod: ${LIBGPIOD_CFLAGS} ${LIBGPIOD_LDFLAGS}")
 endif()
+
+add_compile_definitions(CURRENT_FIRMWARE="malahit-r1-fw-100.bin")
+add_compile_options(-Wno-unused-parameter)
 
 include_directories(${ALSA_INCLUDE_DIRS})
 SOAPY_SDR_MODULE_UTIL(
