@@ -5,8 +5,8 @@ Maintainer: Marat Fayzullin <luarvique@gmail.com>
 Build-Depends: debhelper (>= 9.0.0), cmake, libsoapysdr-dev, libgpiod-dev, libasound2-dev
 Standards-Version: 4.5.0
 Homepage: https://fms.komkon.org/OWRX/
-Vcs-Git: https://github.com/luarvique/SoapyMalahitR1.git
-Vcs-Browser: https://github.com/luarvique/SoapyMalahitR1
+Vcs-Git: https://github.com/luarvique/SoapyMalahitRR.git
+Vcs-Browser: https://github.com/luarvique/SoapyMalahitRR
 
 Package: soapysdr0.8-module-malahit-rr
 Architecture: any

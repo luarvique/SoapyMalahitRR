@@ -115,8 +115,8 @@ SoapySDR::Kwargs MalahitSDR::getHardwareInfo(void) const
 
 size_t MalahitSDR::getNumChannels(const int direction) const
 {
-  // We only support one channel
-  return(1);
+  // We only support one RX channel
+  return(direction? 1:0);
 }
 
 /*******************************************************************
@@ -128,7 +128,7 @@ std::vector<std::string> MalahitSDR::getStreamFormats(const int direction, const
   std::vector<std::string> result;
 
   // We only support one channel, with CS16 data
-  if(channel==0) result.push_back("CS16");
+  if(direction!=0 && channel==0) result.push_back("CS16");
 
   return(result);
 }
@@ -147,8 +147,8 @@ SoapySDR::ArgInfoList MalahitSDR::getStreamArgsInfo(const int direction, const s
 
 SoapySDR::Stream *MalahitSDR::setupStream(const int direction, const std::string &format, const std::vector<size_t> &channels, const SoapySDR::Kwargs &args)
 {
-  // We only have one channel
-  if((channels.size()>1) || ((channels.size()>0) && (channels.at(0)>0)))
+  // We only have one RX channel
+  if((direction==0) || (channels.size()>1) || ((channels.size()>0) && (channels.at(0)>0)))
     throw std::runtime_error("setupStream invalid channel selection");
 
   // We only support CS16 data format
@@ -629,4 +629,4 @@ SoapySDR::Device *makeMalahitSDR(const SoapySDR::Kwargs &args)
 /***********************************************************************
  * Registration
  **********************************************************************/
-static SoapySDR::Registry registerMalahitSDR("malahit-rr", &findMalahitSDR, &makeMalahitSDR, SOAPY_SDR_ABI_VERSION);
+static SoapySDR::Registry registerMalahitSDR("malahitrr", &findMalahitSDR, &makeMalahitSDR, SOAPY_SDR_ABI_VERSION);
