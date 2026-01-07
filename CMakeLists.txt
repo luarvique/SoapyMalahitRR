@@ -44,7 +44,7 @@ else()
     message(STATUS "Using libgpiod: ${LIBGPIOD_CFLAGS} ${LIBGPIOD_LDFLAGS}")
 endif()
 
-add_compile_definitions(CURRENT_FIRMWARE="malahit-r1-fw-100.bin")
+add_compile_definitions(CURRENT_FIRMWARE="malahit-r1-fw-102.bin")
 add_compile_options(-Wno-unused-parameter)
 
 include_directories(${ALSA_INCLUDE_DIRS})
