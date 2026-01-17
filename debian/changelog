@@ -1,3 +1,9 @@
+soapy-malahit-rr (0.8.2) stable; urgency=low
+
+  * Added LEDs control.
+
+ -- Marat Fayzullin <luarvique@gmail.com>  Mon, 19 Jan 2026 12:18:02 -0000
+
 soapy-malahit-rr (0.8.1) stable; urgency=low
 
   * Initial release.

@@ -36,6 +36,18 @@ MalahitSDR::~MalahitSDR()
   alsaDevice.close();
 }
 
+bool MalahitSDR::blinkLEDs(size_t samples)
+{
+  // Do not blink until accumulated enough time (1 second)
+  ledCount += samples;
+  if(ledCount<sampleRate) return(true);
+  ledCount = 0;
+
+  // Invert leds for now
+  leds ^= LED_1 | LED_2;
+  return(stmDevice.leds(leds));
+}
+
 bool MalahitSDR::reportBattery(size_t samples)
 {
   float voltage;
@@ -193,6 +205,8 @@ int MalahitSDR::readStream(SoapySDR::Stream *stream, void * const *buffs, const 
 {
   // Report SW6106 status
   reportBattery(numElems);
+  // Blink LEDs
+  blinkLEDs(numElems);
   // Read data from the ALSA device
   ALSA *device = reinterpret_cast<ALSA *>(stream);
   return(device->read(buffs[0], numElems/16));

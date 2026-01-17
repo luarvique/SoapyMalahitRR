@@ -11,14 +11,15 @@ class STM: public SPI
     static const unsigned int FIRMWARE_STEP = 0x800;
 
     STM(const char *deviceName = "/dev/spidev0.0", unsigned int speed = 10000000)
-    { open(deviceName, speed); }
+    { open(deviceName, speed); curCmd.leds = 0; }
 
     ~STM() { close(); }
 
     bool reset() const;
-    bool go() const;
+    bool go();
 
     bool update(unsigned int frequency, unsigned int switches, unsigned char attenuator = 0, unsigned char gain = 255);
+    bool leds(unsigned char state);
 
     bool getStatus(float *voltage = 0, float *current = 0, char *charge = 0, char *charger = 0, char *id = 0, unsigned int *version = 0) const;
     float getVbat() const;
@@ -44,8 +45,19 @@ class STM: public SPI
       unsigned char pad1[3];    // 29
     } STMState;
 
-    GPIO gpio;
+    typedef struct
+    {
+      unsigned char command;    // 0
+      unsigned char freq[4];    // 1
+      unsigned char switches;   // 5
+      unsigned char attenuator; // 6
+      unsigned char gain;       // 7
+      unsigned char leds;       // 8
+      unsigned char pad1[23];   // 9
+    } STMControl;
 
+    STMControl curCmd;
+    GPIO gpio;
     char id[32];
 
     bool send(unsigned char *data, unsigned int length) const;

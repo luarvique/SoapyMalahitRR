@@ -15,6 +15,9 @@ class MalahitSDR : public SoapySDR::Device
     static const unsigned int SW_BIAST  = 0x0001;
     static const unsigned int SW_LOOP   = 0x0002;
 
+    static const unsigned int LED_1     = 0x0001;
+    static const unsigned int LED_2     = 0x0002;
+
     MalahitSDR();
     ~MalahitSDR();
 
@@ -213,6 +216,8 @@ class MalahitSDR : public SoapySDR::Device
       // Interface to the STM SoC.
     size_t statusCount = SIZE_MAX/2;
       // Count for battery status reporting.
+    size_t ledCount = 0;
+      // Count for LED blinking.
     unsigned int sampleRate = defaultSampleRate;
       // Current sample rate in Hz.
     double curFrequency = 1000000.0;
@@ -225,12 +230,16 @@ class MalahitSDR : public SoapySDR::Device
       // Current attenuation level.
     unsigned int switches = 0;
       // Current GPIO switch states.
+    unsigned int leds = LED_1;
+      // Current LED states.
 
     bool updateRadio();
       // Send configuration to the radio chips
 
     bool reportBattery(size_t samples);
       // Report SW6106 status.
+    bool blinkLEDs(size_t samples);
+      // Blink LEDs.
 };
 
 #endif // MALAHITSDR_HPP

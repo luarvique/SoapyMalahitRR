@@ -14,7 +14,7 @@ bool STM::reset() const
   return(gpio.waitForSTM());
 }
 
-bool STM::go() const
+bool STM::go()
 {
   unsigned char buf[32] = "GO!";
 
@@ -22,6 +22,9 @@ bool STM::go() const
   bool result = send(buf, sizeof(buf));
   if(!result)
     fprintf(stderr, "STM::go(): Failed starting up the STM!\n");
+
+  // Clear current command
+  memset(&curCmd, 0, sizeof(curCmd));
 
   // Let STM start up
   usleep(1000000);
@@ -157,21 +160,33 @@ fprintf(stderr, "CRC FOUND 0x%04X, COMPUTED 0x%04X, LENGTH %d\n", crc, crc16(dat
   return(true);
 }
 
+bool STM::leds(unsigned char state)
+{
+  // Just update the LEDs, keep other state the same
+  curCmd.leds = state;
+
+  bool result = send((unsigned char *)&curCmd, sizeof(curCmd));
+  if(!result)
+    fprintf(stderr, "STM::leds(): Failed communicating with STM!\n");
+
+  return(result);
+}
+
 bool STM::update(unsigned int frequency, unsigned int switches, unsigned char attenuator, unsigned char gain)
 {
   // Compose request
-  unsigned char buf[32];
-  buf[0] = 'S';
-  buf[1] = (frequency >> 24) & 0xFF;
-  buf[2] = (frequency >> 16) & 0xFF;
-  buf[3] = (frequency >> 8) & 0xFF;
-  buf[4] = frequency & 0xFF;
-  buf[5] = switches;
-  buf[6] = attenuator;
-  buf[7] = gain;
+  curCmd.command  = 'S';
+  curCmd.freq[0]  = (frequency >> 24) & 0xFF;
+  curCmd.freq[1]  = (frequency >> 16) & 0xFF;
+  curCmd.freq[2]  = (frequency >> 8) & 0xFF;
+  curCmd.freq[3]  = frequency & 0xFF;
+  curCmd.switches = switches;
+  curCmd.attenuator = attenuator;
+  curCmd.gain     = gain;
+  curCmd.leds     = curCmd.leds;
 
   // Send request
-  bool result = send(buf, sizeof(buf));
+  bool result = send((unsigned char *)&curCmd, sizeof(curCmd));
   if(!result)
     fprintf(stderr, "STM::update(): Failed communicating with STM!\n");
 
