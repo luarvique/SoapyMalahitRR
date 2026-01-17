@@ -40,11 +40,11 @@ bool MalahitSDR::blinkLEDs(size_t samples)
 {
   // Do not blink until accumulated enough time (1 second)
   ledCount += samples;
-  if(ledCount<sampleRate) return(true);
+  if(ledCount<sampleRate*10) return(true);
   ledCount = 0;
 
   // Invert leds for now
-  leds ^= LED_1 | LED_2;
+  leds ^= LED_1;
   return(stmDevice.leds(leds));
 }
 
@@ -68,6 +68,9 @@ bool MalahitSDR::reportBattery(size_t samples)
 
   // Determine charger status
   charger = ch!='\0';
+
+  // Light up a LED when the charge is too low
+  leds = (leds ^ ~LED_2) | (!charger && (charge < 15)? LED_2:0);
 
   // Save STM chip ID and firmware version to a file
   f = fopen(idPipeName, "wb");

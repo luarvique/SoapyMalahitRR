@@ -14,7 +14,7 @@ bool STM::reset() const
   return(gpio.waitForSTM());
 }
 
-bool STM::go()
+bool STM::go() const
 {
   unsigned char buf[32] = "GO!";
 
@@ -22,9 +22,6 @@ bool STM::go()
   bool result = send(buf, sizeof(buf));
   if(!result)
     fprintf(stderr, "STM::go(): Failed starting up the STM!\n");
-
-  // Clear current command
-  memset(&curCmd, 0, sizeof(curCmd));
 
   // Let STM start up
   usleep(1000000);
@@ -56,6 +53,7 @@ void STM::printData(const char *label, const unsigned char *data, unsigned int l
 
 bool STM::getStatus(float *voltage, float *current, char *charge, char *charger, char *id, unsigned int *version) const
 {
+  std::lock_guard <std::mutex> lock(mutex);
   STMState st;
 
   // Receive status from the STM
@@ -160,12 +158,15 @@ fprintf(stderr, "CRC FOUND 0x%04X, COMPUTED 0x%04X, LENGTH %d\n", crc, crc16(dat
   return(true);
 }
 
-bool STM::leds(unsigned char state)
+bool STM::leds(unsigned char state) const
 {
-  // Just update the LEDs, keep other state the same
-  curCmd.leds = state;
+  std::lock_guard <std::mutex> lock(mutex);
+  unsigned char buf[32];
 
-  bool result = send((unsigned char *)&curCmd, sizeof(curCmd));
+  buf[0] = 'L';
+  buf[1] = state;
+
+  bool result = send(buf, sizeof(buf));
   if(!result)
     fprintf(stderr, "STM::leds(): Failed communicating with STM!\n");
 
@@ -174,19 +175,21 @@ bool STM::leds(unsigned char state)
 
 bool STM::update(unsigned int frequency, unsigned int switches, unsigned char attenuator, unsigned char gain)
 {
+  std::lock_guard <std::mutex> lock(mutex);
+  STMControl cmd;
+
   // Compose request
-  curCmd.command  = 'S';
-  curCmd.freq[0]  = (frequency >> 24) & 0xFF;
-  curCmd.freq[1]  = (frequency >> 16) & 0xFF;
-  curCmd.freq[2]  = (frequency >> 8) & 0xFF;
-  curCmd.freq[3]  = frequency & 0xFF;
-  curCmd.switches = switches;
-  curCmd.attenuator = attenuator;
-  curCmd.gain     = gain;
-  curCmd.leds     = curCmd.leds;
+  cmd.command  = 'S';
+  cmd.freq[0]  = (frequency >> 24) & 0xFF;
+  cmd.freq[1]  = (frequency >> 16) & 0xFF;
+  cmd.freq[2]  = (frequency >> 8) & 0xFF;
+  cmd.freq[3]  = frequency & 0xFF;
+  cmd.switches = switches;
+  cmd.attenuator = attenuator;
+  cmd.gain     = gain;
 
   // Send request
-  bool result = send((unsigned char *)&curCmd, sizeof(curCmd));
+  bool result = send((unsigned char *)&cmd, sizeof(cmd));
   if(!result)
     fprintf(stderr, "STM::update(): Failed communicating with STM!\n");
 
