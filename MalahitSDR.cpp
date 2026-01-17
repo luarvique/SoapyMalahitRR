@@ -618,7 +618,7 @@ std::string MalahitSDR::readSetting(const std::string &key) const
   if(key=="lna")         return std::to_string(!!(switches & SW_PREAMP));
   if(key=="attenuator")  return std::to_string(attenuator);
   if(key=="voltage")     return std::to_string(stmDevice.getVbat());
-  if(key=="charger")     return std::to_string(false);
+  if(key=="charger")     return std::to_string(stmDevice.isCharging());
 
   return "";
 }
