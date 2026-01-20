@@ -5,18 +5,10 @@
 #include <string.h>
 #include <math.h>
 
-typedef struct
+static const unsigned int sampleRates[] =
 {
-  char magic[6];
-  char voltage[2]; // 6
-  char current[2]; // 8
-  char charging;   // 10
-  char charge;     // 11
-  char uid[12];    // 12
-  char version[4]; // 24
-  char crcok;      // 28
-  char padding[3];
-} STMState;
+  650000, 744192, 912000, 0
+};
 
 MalahitSDR::MalahitSDR()
 {
@@ -443,12 +435,22 @@ SoapySDR::ArgInfoList MalahitSDR::getFrequencyArgsInfo(const int direction, cons
 void MalahitSDR::setSampleRate(const int direction, const size_t channel, const double rate)
 {
   unsigned int newRate = (unsigned int)rate;
+  int j;
+
+  for(j = 0 ; sampleRates[j] ; ++j)
+    if(newRate == sampleRates[j]) break;
 
   // If given rate valid...
-  if((newRate==defaultSampleRate) && (newRate!=sampleRate))
+  if(sampleRates[j] && (newRate!=sampleRate))
   {
     fprintf(stderr, "setSampleRate(%d): Setting new rate...\n", newRate);
     // Set new sample rate
+    if(!stmDevice.setRate(newRate))
+    {
+      fprintf(stderr, "setSampleRate(%d): Failed setting new rate!\n", newRate);
+      return;
+    }
+    // Rate now set
     sampleRate = newRate;
     // Reopen ALSA device
     if(alsaDevice.isOpen())
@@ -468,7 +470,8 @@ double MalahitSDR::getSampleRate(const int direction, const size_t channel) cons
 std::vector<double> MalahitSDR::listSampleRates(const int direction, const size_t channel) const
 {
   std::vector<double> result;
-  result.push_back(defaultSampleRate);
+  for(int j = 0 ; sampleRates[j] ; ++j)
+    result.push_back(sampleRates[j]);
   return(result);
 }
 

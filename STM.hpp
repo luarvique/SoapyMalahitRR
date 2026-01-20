@@ -21,6 +21,7 @@ class STM: public SPI
 
     bool update(unsigned int frequency, unsigned int switches, unsigned char attenuator = 0, unsigned char gain = 255);
     bool leds(unsigned char state) const;
+    bool setRate(unsigned int rate) const;
 
     bool getStatus(float *voltage = 0, float *current = 0, char *charge = 0, char *charger = 0, char *id = 0, unsigned int *version = 0) const;
     float getVbat() const;

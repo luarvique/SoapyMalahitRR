@@ -203,7 +203,6 @@ class MalahitSDR : public SoapySDR::Device
     const char *statusPipeName = "/tmp/battery";
     const char *idPipeName = "/tmp/stm-id";
     const char *alsaDeviceName = "default";
-    const unsigned int defaultSampleRate = 744192;
     const unsigned int minFrequency = 150000;
     const unsigned int maxFrequency = 1766000000;
 
@@ -218,7 +217,7 @@ class MalahitSDR : public SoapySDR::Device
       // Count for battery status reporting.
     size_t ledCount = 0;
       // Count for LED blinking.
-    unsigned int sampleRate = defaultSampleRate;
+    unsigned int sampleRate = 650000;
       // Current sample rate in Hz.
     double curFrequency = 1000000.0;
       // Current frequency in Hz.

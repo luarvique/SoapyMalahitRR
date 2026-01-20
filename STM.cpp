@@ -173,6 +173,30 @@ bool STM::leds(unsigned char state) const
   return(result);
 }
 
+bool STM::setRate(unsigned int rate) const
+{
+  std::lock_guard <std::mutex> lock(mutex);
+  unsigned char buf[32];
+
+  // Rate in kHz
+  rate /= 1000;
+  if((rate!=650) && (rate!=744) && (rate!=912))
+  {
+    fprintf(stderr, "STM::rate(%dkHz): Invalid sampling rate!\n", rate);
+    return(false);
+  }
+
+  buf[0] = 'R';
+  buf[1] = (rate >> 8) & 0xFF;
+  buf[2] = rate & 0xFF;
+
+  bool result = send(buf, sizeof(buf));
+  if(!result)
+    fprintf(stderr, "STM::rate(%dkHz): Failed communicating with STM!\n", rate);
+
+  return(result);
+}
+
 bool STM::update(unsigned int frequency, unsigned int switches, unsigned char attenuator, unsigned char gain)
 {
   std::lock_guard <std::mutex> lock(mutex);
