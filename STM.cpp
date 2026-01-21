@@ -173,34 +173,18 @@ bool STM::leds(unsigned char state) const
   return(result);
 }
 
-bool STM::setRate(unsigned int rate) const
+bool STM::update(unsigned int rate, unsigned int frequency, unsigned int switches, unsigned char attenuator, unsigned char gain)
 {
   std::lock_guard <std::mutex> lock(mutex);
-  unsigned char buf[32];
+  STMControl cmd;
 
   // Rate in kHz
   rate /= 1000;
   if((rate!=650) && (rate!=744) && (rate!=912))
   {
-    fprintf(stderr, "STM::rate(%dkHz): Invalid sampling rate!\n", rate);
+    fprintf(stderr, "STM::update(): Invalid sampling rate of %dkHz!\n", rate);
     return(false);
   }
-
-  buf[0] = 'R';
-  buf[1] = (rate >> 8) & 0xFF;
-  buf[2] = rate & 0xFF;
-
-  bool result = send(buf, sizeof(buf));
-  if(!result)
-    fprintf(stderr, "STM::rate(%dkHz): Failed communicating with STM!\n", rate);
-
-  return(result);
-}
-
-bool STM::update(unsigned int frequency, unsigned int switches, unsigned char attenuator, unsigned char gain)
-{
-  std::lock_guard <std::mutex> lock(mutex);
-  STMControl cmd;
 
   // Compose request
   cmd.command  = 'S';
@@ -211,6 +195,8 @@ bool STM::update(unsigned int frequency, unsigned int switches, unsigned char at
   cmd.switches = switches;
   cmd.attenuator = attenuator;
   cmd.gain     = gain;
+  cmd.rate[0]  = (rate >> 8) & 0xFF;
+  cmd.rate[1]  = rate & 0xFF;
 
   // Send request
   bool result = send((unsigned char *)&cmd, sizeof(cmd));

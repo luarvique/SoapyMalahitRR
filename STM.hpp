@@ -19,9 +19,8 @@ class STM: public SPI
     bool reset() const;
     bool go() const;
 
-    bool update(unsigned int frequency, unsigned int switches, unsigned char attenuator = 0, unsigned char gain = 255);
+    bool update(unsigned int rate, unsigned int frequency, unsigned int switches, unsigned char attenuator = 0, unsigned char gain = 255);
     bool leds(unsigned char state) const;
-    bool setRate(unsigned int rate) const;
 
     bool getStatus(float *voltage = 0, float *current = 0, char *charge = 0, char *charger = 0, char *id = 0, unsigned int *version = 0) const;
     float getVbat() const;
@@ -54,7 +53,8 @@ class STM: public SPI
       unsigned char switches;   // 5
       unsigned char attenuator; // 6
       unsigned char gain;       // 7
-      unsigned char pad1[24];   // 8
+      unsigned char rate[2];    // 8
+      unsigned char pad1[22];   // 10
     } STMControl;
 
     GPIO gpio;

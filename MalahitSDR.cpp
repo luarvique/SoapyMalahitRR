@@ -89,11 +89,11 @@ bool MalahitSDR::updateRadio()
   // Apply frequency correction
   unsigned int frequency = curFrequency * (1.0 + curFreqCorrection / 1000000.0);
 
-  fprintf(stderr, "updateRadio(): Freq=%dHz, SW=0x%X, ATT=%d\n",
-    frequency, switches, attenuator
+  fprintf(stderr, "updateRadio(): Rate=%dHz, Freq=%dHz, SW=0x%X, ATT=%d\n",
+    sampleRate, frequency, switches, attenuator
   );
 
-  return(stmDevice.update(frequency, switches, attenuator, gain));
+  return(stmDevice.update(sampleRate, frequency, switches, attenuator, gain));
 }
 
 /*******************************************************************
@@ -444,14 +444,9 @@ void MalahitSDR::setSampleRate(const int direction, const size_t channel, const 
   if(sampleRates[j] && (newRate!=sampleRate))
   {
     fprintf(stderr, "setSampleRate(%d): Setting new rate...\n", newRate);
-    // Set new sample rate
-    if(!stmDevice.setRate(newRate))
-    {
-      fprintf(stderr, "setSampleRate(%d): Failed setting new rate!\n", newRate);
-      return;
-    }
     // Rate now set
     sampleRate = newRate;
+    updateRadio();
     // Reopen ALSA device
     if(alsaDevice.isOpen())
     {
