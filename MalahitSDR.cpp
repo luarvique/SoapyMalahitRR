@@ -444,15 +444,19 @@ void MalahitSDR::setSampleRate(const int direction, const size_t channel, const 
   if(sampleRates[j] && (newRate!=sampleRate))
   {
     fprintf(stderr, "setSampleRate(%d): Setting new rate...\n", newRate);
-    // Rate now set
+
+    // Close ALSA device while changing sample rate
+    bool needReopen = alsaDevice.isOpen();
+    if(needReopen) alsaDevice.close();
+
+    // Change sample rate
     sampleRate = newRate;
     updateRadio();
+
     // Reopen ALSA device
-    if(alsaDevice.isOpen())
-    {
-      alsaDevice.close();
+    if(needReopen)
       alsaDevice.open(alsaDeviceName, sampleRate, chunkCount * chunkSize, chunkSize);
-    }
+
     fprintf(stderr, "setSampleRate(%d): DONE!\n", newRate);
   }
 }
