@@ -6,6 +6,7 @@
 #include "ALSA.hpp"
 #include "GPIO.hpp"
 #include "STM.hpp"
+#include <mutex>
 
 class MalahitSDR : public SoapySDR::Device
 {
@@ -208,6 +209,8 @@ class MalahitSDR : public SoapySDR::Device
 
     const unsigned int chunkSize  = 1024;
     const unsigned int chunkCount = 4;
+
+    mutable std::mutex mutex;
 
     ALSA alsaDevice;
       // I2S devices are accessed via ALSA API, encapsulated by this object.

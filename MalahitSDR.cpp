@@ -171,6 +171,8 @@ SoapySDR::Stream *MalahitSDR::setupStream(const int direction, const std::string
 
 void MalahitSDR::closeStream(SoapySDR::Stream *stream)
 {
+  std::lock_guard <std::mutex> lock(mutex);
+
   // Close ALSA device
   (reinterpret_cast<ALSA *>(stream))->close();
 }
@@ -183,6 +185,8 @@ size_t MalahitSDR::getStreamMTU(SoapySDR::Stream *stream) const
 
 int MalahitSDR::activateStream(SoapySDR::Stream *stream, const int flags, const long long timeNs, const size_t numElems)
 {
+  std::lock_guard <std::mutex> lock(mutex);
+
   // Open ALSA device
   ALSA *device = reinterpret_cast<ALSA *>(stream);
   return(device->open(alsaDeviceName, sampleRate, chunkCount * chunkSize, chunkSize)? 0 : -1);
@@ -190,6 +194,8 @@ int MalahitSDR::activateStream(SoapySDR::Stream *stream, const int flags, const 
 
 int MalahitSDR::deactivateStream(SoapySDR::Stream *stream, const int flags, const long long timeNs)
 {
+  std::lock_guard <std::mutex> lock(mutex);
+
   // Close ALSA device
   ALSA *device = reinterpret_cast<ALSA *>(stream);
   device->close();
@@ -198,10 +204,14 @@ int MalahitSDR::deactivateStream(SoapySDR::Stream *stream, const int flags, cons
 
 int MalahitSDR::readStream(SoapySDR::Stream *stream, void * const *buffs, const size_t numElems, int &flags, long long &timeNs, const long timeoutUs)
 {
+  std::lock_guard <std::mutex> lock(mutex);
+
   // Report SW6106 status
   reportBattery(numElems);
+
   // Blink LEDs
   blinkLEDs(numElems);
+
   // Read data from the ALSA device
   ALSA *device = reinterpret_cast<ALSA *>(stream);
   return(device->read(buffs[0], numElems/16));
@@ -443,6 +453,8 @@ void MalahitSDR::setSampleRate(const int direction, const size_t channel, const 
   // If given rate valid...
   if(sampleRates[j] && (newRate!=sampleRate))
   {
+    std::lock_guard <std::mutex> lock(mutex);
+
     fprintf(stderr, "setSampleRate(%d): Setting new rate...\n", newRate);
 
     // Close ALSA device while changing sample rate
