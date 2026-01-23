@@ -43,7 +43,7 @@ class STM: public SPI
       unsigned char version[2]; // 24
       unsigned char batch[2];   // 26
       unsigned char crcok;      // 28
-      unsigned char valid;      // 29
+      unsigned char fwok;       // 29
       unsigned char pad1[2];    // 30
     } STMState;
 
