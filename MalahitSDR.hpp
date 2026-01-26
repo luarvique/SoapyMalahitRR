@@ -207,7 +207,7 @@ class MalahitSDR : public SoapySDR::Device
     const unsigned int minFrequency = 150000;
     const unsigned int maxFrequency = 1766000000;
 
-    const unsigned int chunkSize  = 1024;
+    const unsigned int chunkSize  = 3072;
     const unsigned int chunkCount = 4;
 
     mutable std::mutex mutex;

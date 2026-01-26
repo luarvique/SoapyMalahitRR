@@ -69,7 +69,13 @@ bool STM::getStatus(float *voltage, float *current, char *charge, char *charger,
   if(current) *current = (st.current[0] * 256 + st.current[1]) / 1000.0f;
   if(charge)  *charge  = st.charge;
   if(charger) *charger = st.charging=='C'? 'C' : '\0';
-  if(version) *version = st.version[0] * 256 + st.version[1];
+
+  // Get firmware version (0xFFFF = no firmware)
+  if(version)
+  {
+    *version = st.version[0] * 256 + st.version[1];
+    if(*version == 0xFFFF) *version = 0x0000;
+  }
 
   // Get STM chip ID
   if(id)
