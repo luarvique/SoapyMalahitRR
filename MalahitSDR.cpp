@@ -15,7 +15,7 @@ MalahitSDR::MalahitSDR()
   // Hard-reset attached hardware
   stmDevice.reset();
   // Check firmware and update as necessary
-  stmDevice.updateFirmware("/usr/share/MalahitRR/" CURRENT_FIRMWARE);
+  stmDevice.updateFirmware("/usr/share/malahit/" CURRENT_FIRMWARE);
   // Start STM receiver
   stmDevice.go();
   // Update hardware with initial settings

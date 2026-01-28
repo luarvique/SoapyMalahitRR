@@ -1,5 +1,5 @@
-malahit-*-fw-*.bin usr/share/MalahitRR/
-malahit-id.sh usr/share/MalahitRR/
+malahit-*-fw-*.bin usr/share/malahit/
+malahit-id.sh usr/share/malahit/
 malahit-id.service lib/systemd/system/
 usr/bin/*
 usr/lib/*
