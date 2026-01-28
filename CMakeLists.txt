@@ -47,7 +47,8 @@ endif()
 add_compile_definitions(CURRENT_FIRMWARE="malahit-r1-fw-102.bin")
 add_compile_options(-Wno-unused-parameter)
 
-include_directories(${ALSA_INCLUDE_DIRS})
+include_directories(. ${ALSA_INCLUDE_DIRS})
+
 SOAPY_SDR_MODULE_UTIL(
     TARGET MalahitRR
     SOURCES
@@ -61,3 +62,19 @@ SOAPY_SDR_MODULE_UTIL(
         ${ALSA_LIBRARIES}
         gpiod
 )
+
+add_executable(malahit
+    malahit/malahit.cpp
+    GPIO.cpp
+    ALSA.cpp
+    I2C.cpp
+    SPI.cpp
+    STM.cpp
+)
+
+target_link_libraries(malahit
+    ${ALSA_LIBRARIES}
+    gpiod
+)
+
+install(TARGETS malahit DESTINATION bin)
