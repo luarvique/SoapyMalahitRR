@@ -1,0 +1,11 @@
+[Unit]
+Description=Malahit-RR ID Check
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/share/malahit/malahit-id.sh
+RemainAfterExit=no
+
+[Install]
+WantedBy=multi-user.target
