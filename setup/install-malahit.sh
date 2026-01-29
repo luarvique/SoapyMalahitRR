@@ -1,13 +1,17 @@
 #!/bin/bash
 
 # Add GPIO access library
-sudo apt install gpiod
+#sudo apt install gpiod
 #sudo apt install libgpiod-dev
 
-# Enable I2S audio
-sudo cp asound.conf /etc
-sudo cp alsa.conf /usr/share/alsa
+echo "Installing Soapy Malahit driver..."
+sudo apt install soapysdr-module-malahit-rr
 
+echo "Configuring ALSA for I2S audio..."
+sudo install -o root asound.conf /etc
+sudo install -o root alsa.conf /usr/share/alsa
+
+echo "Installing I2S audio device tree..."
 sudo kdtc \
     ./generic_audio_out_i2s_slave.dts \
     /boot/firmware/overlays/generic_audio_out_i2s_slave.dtbo
@@ -23,19 +27,23 @@ if ! grep -q -F "dtparam=i2s=on" $CONFIG; then
     sudo echo "dtparam=i2s=on" >> $CONFIG
 fi
 
-# Let OpenWebRX access hardware
+echo "Letting OpenWebRX access networking, audio, GPIO, SPI..."
+sudo usermod -a -G nedev openwebrx
 sudo usermod -a -G audio openwebrx
 sudo usermod -a -G gpio openwebrx
 sudo usermod -a -G spi openwebrx
+echo "Groups for" `groups openwebrx`
 
-# Copy Malahit-specific config file
-sudo cp ./settings.json /var/lib/openwebrx
+echo "# Installing Malahit-specific OpenWebRX config file..."
+sudo install -o openwebrx ./settings.json /var/lib/openwebrx
 
-# Add OpenWebRX administrator account
+echo "Adding OpenWebRX administrator account..."
 sudo openwebrx admin adduser admin
 
-# Update Linux and RPI firmware
+echo "Updating Linux and RPI firmware..."
 sudo apt update
 sudo apt full-upgrade
 sudo rpi-update
+
+echo "Rebooting..."
 sudo reboot
