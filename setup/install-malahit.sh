@@ -4,12 +4,15 @@
 #sudo apt install gpiod
 #sudo apt install libgpiod-dev
 
+echo "Getting latest package lists..."
+sudo apt update
+
 echo "Installing Soapy Malahit driver..."
 sudo apt install soapysdr-module-malahit-rr
 
 echo "Configuring ALSA for I2S audio..."
-sudo install -o root asound.conf /etc
-sudo install -o root alsa.conf /usr/share/alsa
+sudo install -o root -g root -m 644 asound.conf /etc
+sudo install -o root -g root -m 644 alsa.conf /usr/share/alsa
 
 echo "Installing I2S audio device tree..."
 sudo kdtc \
@@ -34,14 +37,13 @@ sudo usermod -a -G gpio openwebrx
 sudo usermod -a -G spi openwebrx
 echo "Groups for" `groups openwebrx`
 
-echo "# Installing Malahit-specific OpenWebRX config file..."
-sudo install -o openwebrx ./settings.json /var/lib/openwebrx
-
+echo "# Installing Malahit-specific OpenWebRX config files..."
+sudo install -o openwebrx -g openwebrx -m 644 ./settings.json /var/lib/openwebrx
+sudo install -o root -g root -m 644 ./openwebrx.conf /etc/openwebrx
 echo "Adding OpenWebRX administrator account..."
 sudo openwebrx admin adduser admin
 
-echo "Updating Linux and RPI firmware..."
-sudo apt update
+echo "Upgrading Linux and RPI firmware..."
 sudo apt full-upgrade
 sudo rpi-update
 
