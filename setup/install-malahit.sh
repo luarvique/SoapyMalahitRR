@@ -4,6 +4,9 @@
 #sudo apt install gpiod
 #sudo apt install libgpiod-dev
 
+echo "Shutting down OpenWebRX..."
+sudo systemctl stop openwebrx
+
 echo "Getting latest package lists..."
 sudo apt update
 
