@@ -1,0 +1,233 @@
+{
+    "version": 8,
+    "sdrs": {
+        "c1c91ec7-6182-4250-af98-96f0cefbe4d1": {
+            "name": "Malahit-R1",
+            "type": "malahit_rr",
+            "profiles": {
+                "8730c079-dd68-4157-9c8a-549d581bc17e": {
+                    "name": "LW",
+                    "center_freq": 350000,
+                    "samp_rate": 650000,
+                    "start_freq": 350000,
+                    "start_mod": "am",
+                    "tuning_step": 5000
+                },
+                "0a2e9201-13e7-43a6-8f8b-6f96c10efca4": {
+                    "name": "MW1",
+                    "center_freq": 800000,
+                    "samp_rate": 650000,
+                    "start_freq": 800000,
+                    "start_mod": "am",
+                    "tuning_step": 5000,
+                    "eibi_bookmarks_range": 3000
+                },
+                "0d3217a6-78ba-4f17-a6ca-f6820c35b37e": {
+                    "name": "MW2",
+                    "center_freq": 1200000,
+                    "samp_rate": 650000,
+                    "start_freq": 1200000,
+                    "start_mod": "am",
+                    "tuning_step": 5000,
+                    "eibi_bookmarks_range": 3000
+                },
+                "871130f8-9182-4079-ab18-b87714f7f603": {
+                    "name": "160m",
+                    "center_freq": 1900000,
+                    "samp_rate": 650000,
+                    "start_freq": 1900000,
+                    "start_mod": "lsb",
+                    "tuning_step": 500
+                },
+                "bfba19af-b8c8-496d-ac5c-0bc423b39845": {
+                    "name": "80m",
+                    "center_freq": 3650000,
+                    "samp_rate": 650000,
+                    "start_freq": 3650000,
+                    "start_mod": "lsb",
+                    "tuning_step": 500,
+                    "eibi_bookmarks_range": 10000
+                },
+                "f34cbbf3-883d-4688-92f2-0e82436353c8": {
+                    "name": "40m",
+                    "center_freq": 7200000,
+                    "samp_rate": 744192,
+                    "start_freq": 7200000,
+                    "start_mod": "lsb",
+                    "tuning_step": 500,
+                    "eibi_bookmarks_range": 10000,
+                },
+                "b2bdefcf-e017-45b1-9bf2-d88f3b885b99": {
+                    "name": "20m",
+                    "center_freq": 14050000,
+                    "samp_rate": 912000,
+                    "start_freq": 14050000,
+                    "start_mod": "usb",
+                    "tuning_step": 500,
+                    "eibi_bookmarks_range": 10000
+                },
+                "d43c1f95-f607-457f-83f9-d78d81f6b550": {
+                    "name": "10m",
+                    "center_freq": 28500000,
+                    "samp_rate": 650000,
+                    "start_freq": 28500000,
+                    "start_mod": "usb",
+                    "tuning_step": 500
+                },
+                "fa87a766-f8eb-484a-9bcf-bd3ba4560674": {
+                    "name": "VHF1",
+                    "center_freq": 144600000,
+                    "samp_rate": 650000,
+                    "start_freq": 144600000,
+                    "start_mod": "nfm",
+                    "tuning_step": 5000
+                },
+                "c87541e0-23e6-49ec-8ffd-a8d6e9ee0e15": {
+                    "name": "VHF2",
+                    "center_freq": 145600000,
+                    "samp_rate": 650000,
+                    "start_freq": 145600000,
+                    "start_mod": "nfm",
+                    "tuning_step": 5000
+                }
+            },
+            "highZ": false,
+            "lna": false,
+            "antenna": "Antenna",
+            "attenuator": 0,
+            "biasT": false,
+            "rf_gain": 0.0,
+            "waterfall_levels": {
+                "min": -90.0,
+                "max": -20.0
+            }
+        }
+    },
+    "receiver_name": "N0NAME",
+    "receiver_location": "Yekaterinburg, Russia",
+    "receiver_asl": 100,
+    "receiver_admin": "example@example.com",
+    "bandplan_region": 1,
+    "receiver_gps": {
+        "lat": 56.84344116658984,
+        "lon": 60.59746787430372
+    },
+    "gps_updates": false,
+    "photo_title": "",
+    "photo_desc": "",
+    "max_clients": 20,
+    "keep_files": 20,
+    "session_timeout": 0,
+    "usage_policy_url": "policy",
+    "allow_chat": true,
+    "allow_audio_recording": true,
+    "allow_center_freq_changes": true,
+    "magic_key": "",
+    "receiver_keys": [],
+    "waterfall_scheme": "ZoranWaterfall",
+    "fft_fps": 16,
+    "fft_size": 8192,
+    "fft_voverlap_factor": 0.3,
+    "waterfall_levels": {
+        "min": -90.0,
+        "max": -20.0
+    },
+    "waterfall_auto_levels": {
+        "min": 3.0,
+        "max": 10.0
+    },
+    "waterfall_auto_level_default_mode": false,
+    "waterfall_auto_min_range": 50,
+    "audio_compression": "none",
+    "fft_compression": "adpcm",
+    "tuning_precision": 0,
+    "eibi_bookmarks_range": 0,
+    "repeater_range": 0,
+    "map_type": "leaflet",
+    "google_maps_api_key": "",
+    "openweathermap_api_key": "",
+    "map_position_retention_time": 7200,
+    "map_call_retention_time": 300,
+    "map_max_calls": 5,
+    "map_ignore_indirect_reports": false,
+    "map_prefer_recent_reports": true,
+    "callsign_url": "https://www.qrzcq.com/call/{}",
+    "vessel_url": "https://www.vesselfinder.com/vessels/details/{}",
+    "flight_url": "https://flightaware.com/live/flight/{}",
+    "modes_url": "https://flightaware.com/live/modes/{}/redirect",
+    "max_clients_per_ip": 20,
+    "bot_ban_enabled": true,
+    "ui_theme": "black",
+    "wifi_name_ap": "openwebrx-r1",
+    "wifi_pass_ap": "openwebrx-r1",
+    "wifi_enable_1": true,
+    "wifi_name_1": "R1_openwebrx",
+    "wifi_pass_1": "R1_openwebrx",
+    "wifi_enable_2": true,
+    "wifi_name_2": "",
+    "wifi_pass_2": "",
+    "wifi_enable_3": false,
+    "wifi_name_3": "",
+    "wifi_pass_3": "",
+    "wifi_enable_4": false,
+    "wifi_name_4": "",
+    "wifi_pass_4": "",
+    "wifi_enable_ap": true,
+    "receiver_country": "RU",
+    "sonde_url": "https://sondehub.org/{}",
+    "squelch_auto_margin": 10,
+    "digimodes_fft_size": 2048,
+    "ssb_agc_profile": "Slow",
+    "dab_output_rate": 48000,
+    "wfm_deemphasis_tau": 5e-05,
+    "wfm_rds_rbds": false,
+    "cw_showcw": false,
+    "dsc_show_errors": true,
+    "ism_report_levels": false,
+    "digital_voice_dmr_id_lookup": true,
+    "digital_voice_nxdn_id_lookup": true,
+    "rec_squelch": 20,
+    "rec_hang_time": 1000,
+    "rec_produce_silence": false,
+    "adsb_ttl": 900,
+    "vdl2_ttl": 1800,
+    "hfdl_ttl": 1800,
+    "acars_ttl": 1800,
+    "paging_charset": "US",
+    "paging_filter": true,
+    "fax_lpm": 120,
+    "fax_min_length": 200,
+    "fax_max_length": 1500,
+    "fax_postprocess": true,
+    "fax_color": false,
+    "fax_am": false,
+    "image_compress": true,
+    "image_compress_level": "7",
+    "image_compress_filter": "5",
+    "image_quantize": false,
+    "image_quantize_colors": "256",
+    "decoding_queue_workers": 2,
+    "decoding_queue_length": 10,
+    "wsjt_decoding_depth": 3,
+    "wsjt_decoding_depths": {
+        "jt65": 1
+    },
+    "js8_decoding_depth": 3,
+    "js8_enabled_profiles": [
+        "normal",
+        "slow"
+    ],
+    "fst4_enabled_intervals": [
+        15,
+        30
+    ],
+    "fst4w_enabled_intervals": [
+        120,
+        300
+    ],
+    "q65_enabled_combinations": [
+        "A30",
+        "C60",
+        "E120"
+    ]
+}
