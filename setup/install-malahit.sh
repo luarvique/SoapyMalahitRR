@@ -25,19 +25,19 @@ sudo kdtc \
 CONFIG=/boot/firmware/config.txt
 sudo touch $CONFIG
 
-if ! grep -q -F "dtoverlay=generic_audio_out_i2s_slave" $CONFIG; then
-    sudo echo "dtoverlay=generic_audio_out_i2s_slave" >> $CONFIG
+if ! grep -qxF "dtoverlay=generic_audio_out_i2s_slave" $CONFIG; then
+    echo "dtoverlay=generic_audio_out_i2s_slave" | sudo tee -a $CONFIG
 fi
 
-if ! grep -q -F "dtparam=i2s=on" $CONFIG; then
-    sudo echo "dtparam=i2s=on" >> $CONFIG
+if ! grep -qxF "dtparam=i2s=on" $CONFIG; then
+    echo "dtparam=i2s=on" | sudo tee -a $CONFIG
 fi
 
 echo "Letting OpenWebRX access networking, audio, GPIO, SPI..."
-sudo usermod -a -G nedev openwebrx
-sudo usermod -a -G audio openwebrx
-sudo usermod -a -G gpio openwebrx
-sudo usermod -a -G spi openwebrx
+sudo usermod -aG nedev openwebrx
+sudo usermod -aG audio openwebrx
+sudo usermod -aG gpio openwebrx
+sudo usermod -aG spi openwebrx
 echo "Groups for" `groups openwebrx`
 
 echo "# Installing Malahit-specific OpenWebRX config files..."
