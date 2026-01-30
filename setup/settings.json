@@ -55,7 +55,7 @@
                     "start_freq": 7200000,
                     "start_mod": "lsb",
                     "tuning_step": 500,
-                    "eibi_bookmarks_range": 10000,
+                    "eibi_bookmarks_range": 10000
                 },
                 "b2bdefcf-e017-45b1-9bf2-d88f3b885b99": {
                     "name": "20m",
