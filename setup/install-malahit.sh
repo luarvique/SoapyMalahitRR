@@ -34,7 +34,7 @@ if ! grep -qxF "dtparam=i2s=on" $CONFIG; then
 fi
 
 echo "Letting OpenWebRX access networking, audio, GPIO, SPI..."
-sudo usermod -aG nedev openwebrx
+sudo usermod -aG netdev openwebrx
 sudo usermod -aG audio openwebrx
 sudo usermod -aG gpio openwebrx
 sudo usermod -aG spi openwebrx
