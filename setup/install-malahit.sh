@@ -40,6 +40,12 @@ sudo usermod -aG gpio openwebrx
 sudo usermod -aG spi openwebrx
 echo "Groups for" `groups openwebrx`
 
+echo "Letting netdev group control Network Manager..."
+PKLA=/etc/polkit-1/localauthority/50-local.d/org.freedesktop.NetworkManager.pkla
+if [ ! -e $PKLA ]; then
+    sudo install -o root -g root -m 644 netdev-nmcli.pkla $PKLA
+fi
+
 echo "# Installing Malahit-specific OpenWebRX config files..."
 sudo install -o openwebrx -g openwebrx -m 644 ./settings.json /var/lib/openwebrx
 sudo install -o root -g root -m 644 ./openwebrx.conf /etc/openwebrx
