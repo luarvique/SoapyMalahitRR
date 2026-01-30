@@ -22,6 +22,7 @@ sudo kdtc \
     ./generic_audio_out_i2s_slave.dts \
     /boot/firmware/overlays/generic_audio_out_i2s_slave.dtbo
 
+echo "Enabling I2S and SPI hardware..."
 CONFIG=/boot/firmware/config.txt
 sudo touch $CONFIG
 
@@ -31,6 +32,10 @@ fi
 
 if ! grep -qxF "dtparam=i2s=on" $CONFIG; then
     echo "dtparam=i2s=on" | sudo tee -a $CONFIG
+fi
+
+if ! grep -qxF "dtparam=spi=on" $CONFIG; then
+    echo "dtparam=spi=on" | sudo tee -a $CONFIG
 fi
 
 echo "Letting OpenWebRX access networking, audio, GPIO, SPI..."
