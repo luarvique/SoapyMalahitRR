@@ -1,0 +1,79 @@
+                    GETTING STARTED WITH MALAHIT-R1
+
+You will need the following items to get started with your Malahit-R1
+remote SDR receiver:
+
+1) A smartphone, a tablet, or a computer that will serve as display.
+2) Four 18650 rechargeable batteries that will go inside the receiver.
+3) A laptop power supply with the USB-C connector, to charge batteries.
+4) A three meter wire for the loop antenna.
+
+
+                          SETTING THINGS UP
+
+Once you have the above items, follow the steps outlined below:
+
+1) Carefully unscrew and remove end covers, then open the Malahit-R1
+   case.
+
+2) Install four 18650 batteries into enclosed holder. Make sure you
+   observe the correct polarity. Inserting batteries in the opposite
+   polarity may damage the receiver.
+
+3) Close the Malahit-R1 case and screw back the end covers.
+
+4) Attach the ends of a three meter wire to the pair of terminal posts
+   found at the Malahit-R1 receiver.
+
+5) Use power supply to plug the receiver into a wall outlet.
+
+6) Press and release the POWER button and wait for 15-30 seconds for
+   the receiver to start.
+
+7) On your smartphone, table, or computer, look at the available WiFi
+   networks and connect to the one named "openwebrx". Use the "openwebrx"
+   password to connect.
+
+8) Go to a web browser of your choice and input the following web
+   address:
+
+       http://192.168.10.1:8073/
+
+9) Once the Malahit-R1 web UI loads, press the large arrow button, and
+   listen to the reciever!
+
+
+                              NEXT STEPS
+
+Once you have Malahit-R1 receiver running, please, go through the
+following steps in order to finish setting up your receiver:
+
+1) Click on the "Settings" icon at the top-right corner of the web UI.
+
+2) Log into Settings by entering "admin" as user name and "malahit" as
+   password.
+
+3) Click on "General Settings", go to the bottom of the page, and change
+   your admin password to something difficult to guess.
+
+4) While at the "General Settings" page, you can also set up your
+   receiver name, geolocation, the ITU region and country your are in,
+   and other settings.
+  
+5) Once done with the "General Settings" page, click on "Apply and Save"
+   to save the new password and other settings.
+
+6) Go back to the main Settings page, click on "WiFi Setup", and enter
+   the name and password for your local WiFi network. You can have up to
+   four different WiFi networks configured in the "WiFi Setup".
+
+7) While at the "WiFi Setup" page, you can also change the name and
+   password of the internal access point that gets activated when
+   Malahit-R1 cannot connect to any existing WiFi networks.
+
+8) Once done with the "WiFi Setup" page, click on "Apply and Save" to
+   save the new WiFi setup.
+
+9) Click on the "Help" icon at the top of the web UI to read the rest
+   of the documentation and find out what else you can do with your
+   Malahit-R1 SDR receiver!
