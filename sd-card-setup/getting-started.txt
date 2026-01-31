@@ -57,8 +57,8 @@ following steps in order to finish setting up your receiver:
    your admin password to something difficult to guess.
 
 4) While at the "General Settings" page, you can also set up your
-   receiver name, geolocation, the ITU region and country your are in,
-   and other settings.
+   receiver name, geographic location, the ITU region and country you
+   are in, and other settings.
   
 5) Once done with the "General Settings" page, click on "Apply and Save"
    to save the new password and other settings.
