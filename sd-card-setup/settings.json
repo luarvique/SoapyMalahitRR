@@ -92,8 +92,8 @@
                 }
             },
             "highZ": false,
-            "lna": false,
-            "antenna": "Antenna",
+            "lna": true,
+            "antenna": "Loop",
             "attenuator": 0,
             "biasT": false,
             "rf_gain": 0.0,
