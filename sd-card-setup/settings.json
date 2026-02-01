@@ -109,8 +109,8 @@
     "receiver_admin": "example@example.com",
     "bandplan_region": 0,
     "receiver_gps": {
-        "lat": 54.456720,
-        "lon": 19.643848
+        "lat": 54.494536,
+        "lon": 19.709224
     },
     "gps_updates": false,
     "photo_title": "",
