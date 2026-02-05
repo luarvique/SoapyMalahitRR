@@ -57,8 +57,8 @@ bool GPIO::initialize(const char *chipName)
   if(gpiod_line_request_output(rst_line, "master", 0) < 0)
   {
     fprintf(stderr, "GPIO::initialize(): Failed setting RST GPIO line as output\n");
-    //uninitialize();
-    //return(false);
+    uninitialize();
+    return(false);
   }
 
   busy_line = gpiod_chip_get_line(chip, GPIOD_BUSY_LINE);
@@ -71,9 +71,9 @@ bool GPIO::initialize(const char *chipName)
 
   if(gpiod_line_request_input(busy_line, "master") < 0)
   {
-    fprintf(stderr, "GPIO::initialize(): Failed setting BUSY GPIO line as output\n");
-    //uninitialize();
-    //return(false);
+    fprintf(stderr, "GPIO::initialize(): Failed setting BUSY GPIO line as input\n");
+    uninitialize();
+    return(false);
   }
 
   // Success
