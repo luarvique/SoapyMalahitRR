@@ -1,17 +1,19 @@
 #!/bin/bash
 
-# Add GPIO access library
-#sudo apt install gpiod
-#sudo apt install libgpiod-dev
-
-echo "### Shutting down OpenWebRX..."
-sudo systemctl stop openwebrx
+FWCONFIG=/boot/firmware/config.txt
+UDEVRULES=/etc/udev/rules.d/60-malahit.rules
 
 echo "### Getting latest package lists..."
 sudo apt update
 
+echo "### Installing OpenWebRX+..."
+sudo apt install openwebrx
+
 echo "### Installing Soapy Malahit driver..."
 sudo apt install soapysdr-module-malahit-rr
+
+echo "### Shutting down OpenWebRX..."
+sudo systemctl stop openwebrx
 
 echo "### Configuring ALSA for I2S audio..."
 sudo install -o root -g root -m 644 asound.conf /etc
@@ -23,19 +25,32 @@ sudo kdtc \
     /boot/firmware/overlays/generic_audio_out_i2s_slave.dtbo
 
 echo "### Enabling I2S and SPI hardware..."
-CONFIG=/boot/firmware/config.txt
-sudo touch $CONFIG
+sudo touch $FWCONFIG
 
-if ! grep -qxF "dtoverlay=generic_audio_out_i2s_slave" $CONFIG; then
-    echo "dtoverlay=generic_audio_out_i2s_slave" | sudo tee -a $CONFIG
+if ! grep -qxF "dtoverlay=generic_audio_out_i2s_slave" $FWCONFIG; then
+    echo "dtoverlay=generic_audio_out_i2s_slave" | sudo tee -a $FWCONFIG
 fi
 
-if ! grep -qxF "dtparam=i2s=on" $CONFIG; then
-    echo "dtparam=i2s=on" | sudo tee -a $CONFIG
+if ! grep -qxF "dtparam=i2s=on" $FWCONFIG; then
+    echo "dtparam=i2s=on" | sudo tee -a $FWCONFIG
 fi
 
-if ! grep -qxF "dtparam=spi=on" $CONFIG; then
-    echo "dtparam=spi=on" | sudo tee -a $CONFIG
+if ! grep -qxF "dtparam=spi=on" $FWCONFIG; then
+    echo "dtparam=spi=on" | sudo tee -a $FWCONFIG
+fi
+
+if [ ! $(getent group gpio) ]; then
+    echo "### Adding missing GPIO system group..."
+    sudo addgroup --system gpio
+    sudo chgrp gpio /dev/gpiochip*
+    echo 'KERNEL=="gpiochip*", GROUP="gpio", MODE="0660"' | sudo tee -a $UDEVRULES
+fi
+
+if [ ! $(getent group spi) ]; then
+    echo "### Adding missing SPI system group..."
+    sudo addgroup --system spi
+    sudo chgrp spi /dev/spidev*
+    echo 'KERNEL=="spidev*", GROUP="spi", MODE="0660"' | sudo tee -a $UDEVRULES
 fi
 
 echo "### Letting OpenWebRX access networking, audio, GPIO, SPI..."
