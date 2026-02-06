@@ -5,8 +5,13 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+#ifdef ALLWINNER
+#define GPIOD_RST_LINE     262
+#define GPIOD_BUSY_LINE    256
+#else
 #define GPIOD_RST_LINE     25
 #define GPIOD_BUSY_LINE     5
+#endif
 
 void GPIO::uninitialize()
 {
