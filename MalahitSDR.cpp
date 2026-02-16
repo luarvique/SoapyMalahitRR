@@ -10,6 +10,12 @@ static const unsigned int sampleRates[] =
   650000, 744192, 912000, 0
 };
 
+static const double gains[16] =
+{
+  0.0, 0.4, 0.6, 0.9, 1.3, 1.4,  1.5,  2.1,
+  4.8, 8.4, 6.5, 7.4, 9.3, 10.9, 11.8, 13.1
+};
+
 MalahitSDR::MalahitSDR()
 {
   // Hard-reset attached hardware
@@ -336,15 +342,21 @@ void MalahitSDR::setGain(const int direction, const size_t channel, const double
 
 void MalahitSDR::setGain(const int direction, const size_t channel, const std::string &name, const double value)
 {
-   SoapySDR::Range range = getGainRange(direction, channel, name);
-   unsigned int v = round(
-     value<range.minimum()? range.minimum()
-   : value>range.maximum()? range.maximum()
-   : value);
+  double delta = std::abs(value - gains[0]);
+  unsigned int j, i;
 
-  if((name=="MAIN") && (v!=gain))
+  for(j=1, i=0 ; j < 16 ; ++j)
   {
-    gain = v;
+    double d = std::abs(value - gains[j]);
+    if(d < delta) { delta = d; i = j; }
+  }
+
+  // @@@ LSB is not gain
+  i <<= 1;
+
+  if((name=="MAIN") && (i!=gain))
+  {
+    gain = i;
     updateRadio();
   }
 }
@@ -356,7 +368,8 @@ double MalahitSDR::getGain(const int direction, const size_t channel) const
 
 double MalahitSDR::getGain(const int direction, const size_t channel, const std::string &name) const
 {
-  return(name=="MAIN"? (double)gain : 0.0);
+  // @@@ LSB is not gain
+  return(name=="MAIN"? gains[gain >> 1] : 0.0);
 }
 
 SoapySDR::Range MalahitSDR::getGainRange(const int direction, const size_t channel) const
@@ -366,7 +379,7 @@ SoapySDR::Range MalahitSDR::getGainRange(const int direction, const size_t chann
 
 SoapySDR::Range MalahitSDR::getGainRange(const int direction, const size_t channel, const std::string &name) const
 {
-  return(name=="MAIN"? SoapySDR::Range(0.0, 63.0) : SoapySDR::Range(0.0, 0.0));
+  return(name=="MAIN"? SoapySDR::Range(gains[0], gains[15]) : SoapySDR::Range(0.0, 0.0));
 }
 
 /*******************************************************************

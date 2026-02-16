@@ -5,6 +5,12 @@
 #include <stdio.h>
 #include <ctype.h>
 
+#ifdef ALLWINNER
+const char *STM::DEFAULT_SPI = "/dev/spidev1.0";
+#else
+const char *STM::DEFAULT_SPI = "/dev/spidev0.0";
+#endif
+
 bool STM::reset() const
 {
   // Hard-reset STM chip

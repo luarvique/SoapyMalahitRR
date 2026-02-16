@@ -10,12 +10,7 @@ class STM: public SPI
   public:
     static const unsigned int FIRMWARE_SIZE = 0x200000;
     static const unsigned int FIRMWARE_STEP = 0x800;
-
-#ifdef ALLWINNER
-    static const char *DEFAULT_SPI = "/dev/spidev1.0";
-#else
-    static const char *DEFAULT_SPI = "/dev/spidev0.0";
-#endif
+    static const char *DEFAULT_SPI;
 
     STM(const char *deviceName = DEFAULT_SPI, unsigned int speed = 10000000)
     { open(deviceName, speed); }
