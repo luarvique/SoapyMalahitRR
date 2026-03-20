@@ -74,13 +74,92 @@
                     "start_mod": "usb",
                     "tuning_step": 500
                 },
+                "c986537a-802e-47d9-be1f-51d5a042dc0e": {
+                    "name": "CB",
+                    "center_freq": 27500000,
+                    "samp_rate": 650000,
+                    "start_freq": 27500000,
+                    "start_mod": "am",
+                    "tuning_step": 1000
+                },
+                "896bfe7c-d0f5-463d-bf82-1892da8cd5b7": {
+                    "name": "49m",
+                    "center_freq": 6000000,
+                    "samp_rate": 650000,
+                    "start_freq": 6000000,
+                    "start_mod": "am",
+                    "tuning_step": 5000,
+                    "eibi_bookmarks_range": 5000
+                },
+                "9a5b9208-3063-4554-b517-d43102397426": {
+                    "name": "41m",
+                    "center_freq": 7350000,
+                    "samp_rate": 650000,
+                    "start_freq": 7350000,
+                    "start_mod": "am",
+                    "tuning_step": 5000,
+                    "eibi_bookmarks_range": 5000
+                },
+                "2d539f44-60ac-456e-bf95-24de971823b2": {
+                    "name": "31m",
+                    "center_freq": 9500000,
+                    "samp_rate": 650000,
+                    "start_freq": 9500000,
+                    "start_mod": "am",
+                    "tuning_step": 5000,
+                    "eibi_bookmarks_range": 5000
+                },
+                "563e180c-b748-45d8-8182-6a695b8e7586": {
+                    "name": "25m",
+                    "center_freq": 11900000,
+                    "samp_rate": 650000,
+                    "start_freq": 11900000,
+                    "start_mod": "am",
+                    "tuning_step": 5000,
+                    "eibi_bookmarks_range": 5000
+                },
+                "e13355f4-e354-41e9-bc3b-5f547774c86a": {
+                    "name": "22m",
+                    "center_freq": 13700000,
+                    "samp_rate": 650000,
+                    "start_freq": 13700000,
+                    "start_mod": "am",
+                    "tuning_step": 5000,
+                    "eibi_bookmarks_range": 5000
+                },
+                "2b7cb668-449e-457c-8771-430455a1e7ca": {
+                    "name": "19m",
+                    "center_freq": 15450000,
+                    "samp_rate": 650000,
+                    "start_freq": 15450000,
+                    "start_mod": "am",
+                    "tuning_step": 5000,
+                    "eibi_bookmarks_range": 5000
+                },
+                "1563b574-2c9b-43be-9d10-029d0d45bca3": {
+                    "name": "FM1",
+                    "center_freq": 98000000,
+                    "samp_rate": 650000,
+                    "start_freq": 98000000,
+                    "start_mod": "nfm",
+                    "tuning_step": 50000
+                },
+                "f3f254ac-4349-4f54-8008-378703b362a5": {
+                    "name": "FM2",
+                    "center_freq": 100000000,
+                    "samp_rate": 650000,
+                    "start_freq": 100000000,
+                    "start_mod": "nfm",
+                    "tuning_step": 50000
+                },
                 "fa87a766-f8eb-484a-9bcf-bd3ba4560674": {
                     "name": "VHF1",
                     "center_freq": 144600000,
                     "samp_rate": 650000,
                     "start_freq": 144600000,
                     "start_mod": "nfm",
-                    "tuning_step": 5000
+                    "tuning_step": 5000,
+                    "repeater_range": 50
                 },
                 "c87541e0-23e6-49ec-8ffd-a8d6e9ee0e15": {
                     "name": "VHF2",
@@ -88,7 +167,26 @@
                     "samp_rate": 650000,
                     "start_freq": 145600000,
                     "start_mod": "nfm",
-                    "tuning_step": 5000
+                    "tuning_step": 5000,
+                    "repeater_range": 50
+                },
+                "c49c23f6-f82d-46b6-a316-e09328df0821": {
+                    "name": "UHF1",
+                    "center_freq": 445000000,
+                    "samp_rate": 650000,
+                    "start_freq": 445000000,
+                    "start_mod": "nfm",
+                    "tuning_step": 5000,
+                    "repeater_range": 50
+                },
+                "021a7a20-b12e-49f7-a9d9-1e6fe9f1f47e": {
+                    "name": "UHF2",
+                    "center_freq": 446000000,
+                    "samp_rate": 650000,
+                    "start_freq": 446000000,
+                    "start_mod": "nfm",
+                    "tuning_step": 5000,
+                    "repeater_range": 50
                 }
             },
             "highZ": false,
