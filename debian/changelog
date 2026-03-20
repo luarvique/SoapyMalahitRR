@@ -1,3 +1,10 @@
+soapy-malahit-rr (0.8.3) stable; urgency=low
+
+  * First product release.
+  * Updated gains.
+
+ -- Marat Fayzullin <luarvique@gmail.com>  Fri, 20 Mar 2026 12:18:02 -0000
+
 soapy-malahit-rr (0.8.2) stable; urgency=low
 
   * Added LEDs control.
