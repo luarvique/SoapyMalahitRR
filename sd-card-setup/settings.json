@@ -45,8 +45,7 @@
                     "samp_rate": 650000,
                     "start_freq": 3650000,
                     "start_mod": "lsb",
-                    "tuning_step": 500,
-                    "eibi_bookmarks_range": 10000
+                    "tuning_step": 500
                 },
                 "f34cbbf3-883d-4688-92f2-0e82436353c8": {
                     "name": "40m",
@@ -54,8 +53,7 @@
                     "samp_rate": 744192,
                     "start_freq": 7200000,
                     "start_mod": "lsb",
-                    "tuning_step": 500,
-                    "eibi_bookmarks_range": 10000
+                    "tuning_step": 500
                 },
                 "b2bdefcf-e017-45b1-9bf2-d88f3b885b99": {
                     "name": "20m",
@@ -63,8 +61,7 @@
                     "samp_rate": 912000,
                     "start_freq": 14050000,
                     "start_mod": "usb",
-                    "tuning_step": 500,
-                    "eibi_bookmarks_range": 10000
+                    "tuning_step": 500
                 },
                 "d43c1f95-f607-457f-83f9-d78d81f6b550": {
                     "name": "10m",
@@ -76,9 +73,9 @@
                 },
                 "c986537a-802e-47d9-be1f-51d5a042dc0e": {
                     "name": "CB",
-                    "center_freq": 27500000,
+                    "center_freq": 27250000,
                     "samp_rate": 650000,
-                    "start_freq": 27500000,
+                    "start_freq": 27250000,
                     "start_mod": "am",
                     "tuning_step": 1000
                 },
@@ -102,18 +99,18 @@
                 },
                 "2d539f44-60ac-456e-bf95-24de971823b2": {
                     "name": "31m",
-                    "center_freq": 9500000,
+                    "center_freq": 9650000,
                     "samp_rate": 650000,
-                    "start_freq": 9500000,
+                    "start_freq": 9650000,
                     "start_mod": "am",
                     "tuning_step": 5000,
                     "eibi_bookmarks_range": 5000
                 },
                 "563e180c-b748-45d8-8182-6a695b8e7586": {
                     "name": "25m",
-                    "center_freq": 11900000,
+                    "center_freq": 11850000,
                     "samp_rate": 650000,
-                    "start_freq": 11900000,
+                    "start_freq": 11850000,
                     "start_mod": "am",
                     "tuning_step": 5000,
                     "eibi_bookmarks_range": 5000
