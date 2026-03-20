@@ -136,7 +136,7 @@
         "min": 3.0,
         "max": 10.0
     },
-    "waterfall_auto_level_default_mode": false,
+    "waterfall_auto_level_default_mode": true,
     "waterfall_auto_min_range": 50,
     "audio_compression": "none",
     "fft_compression": "adpcm",
