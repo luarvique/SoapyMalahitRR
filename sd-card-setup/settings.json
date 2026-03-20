@@ -20,7 +20,7 @@
                     "start_freq": 800000,
                     "start_mod": "am",
                     "tuning_step": 5000,
-                    "eibi_bookmarks_range": 3000
+                    "eibi_bookmarks_range": 5000
                 },
                 "0d3217a6-78ba-4f17-a6ca-f6820c35b37e": {
                     "name": "MW2",
@@ -29,7 +29,7 @@
                     "start_freq": 1200000,
                     "start_mod": "am",
                     "tuning_step": 5000,
-                    "eibi_bookmarks_range": 3000
+                    "eibi_bookmarks_range": 5000
                 },
                 "871130f8-9182-4079-ab18-b87714f7f603": {
                     "name": "160m",
@@ -86,7 +86,7 @@
                     "start_freq": 6000000,
                     "start_mod": "am",
                     "tuning_step": 5000,
-                    "eibi_bookmarks_range": 5000
+                    "eibi_bookmarks_range": 10000
                 },
                 "9a5b9208-3063-4554-b517-d43102397426": {
                     "name": "41m",
@@ -95,7 +95,7 @@
                     "start_freq": 7350000,
                     "start_mod": "am",
                     "tuning_step": 5000,
-                    "eibi_bookmarks_range": 5000
+                    "eibi_bookmarks_range": 10000
                 },
                 "2d539f44-60ac-456e-bf95-24de971823b2": {
                     "name": "31m",
@@ -104,7 +104,7 @@
                     "start_freq": 9650000,
                     "start_mod": "am",
                     "tuning_step": 5000,
-                    "eibi_bookmarks_range": 5000
+                    "eibi_bookmarks_range": 10000
                 },
                 "563e180c-b748-45d8-8182-6a695b8e7586": {
                     "name": "25m",
@@ -113,7 +113,7 @@
                     "start_freq": 11850000,
                     "start_mod": "am",
                     "tuning_step": 5000,
-                    "eibi_bookmarks_range": 5000
+                    "eibi_bookmarks_range": 10000
                 },
                 "e13355f4-e354-41e9-bc3b-5f547774c86a": {
                     "name": "22m",
@@ -122,7 +122,7 @@
                     "start_freq": 13700000,
                     "start_mod": "am",
                     "tuning_step": 5000,
-                    "eibi_bookmarks_range": 5000
+                    "eibi_bookmarks_range": 10000
                 },
                 "2b7cb668-449e-457c-8771-430455a1e7ca": {
                     "name": "19m",
@@ -131,7 +131,7 @@
                     "start_freq": 15450000,
                     "start_mod": "am",
                     "tuning_step": 5000,
-                    "eibi_bookmarks_range": 5000
+                    "eibi_bookmarks_range": 10000
                 },
                 "1563b574-2c9b-43be-9d10-029d0d45bca3": {
                     "name": "FM1",
