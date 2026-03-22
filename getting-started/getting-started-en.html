@@ -1,0 +1,234 @@
+<HTML>
+
+<HEAD>
+<TITLE>Malahit-R1 Getting Started Guide</TITLE>
+<META NAME="VIEWPORT" CONTENT="width=device-width, initial-scale=1">
+<LINK REL="STYLESHEET" HREF="/style.css" TYPE="text/css">
+<LINK REL="CANONICAL" HREF=".">
+
+<STYLE>
+  @media print
+  {
+    .NoPrint { visibility: hidden; }
+  }
+</STYLE>
+
+<!-- Google tag (gtag.js) -->
+<SCRIPT ASYNC 
+SRC="https://www.googletagmanager.com/gtag/js?id=G-WZ3N8DWMCY"></$
+<SCRIPT>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-WZ3N8DWMCY');
+</SCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#000080" VLINK="#606060">
+
+<TABLE CLASS="NoPrint">
+<TR>
+<TD ALIGN="LEFT" NOWRAP STYLE="border-top:none;">
+<I><A HREF="getting-started-en.pdf">Download PDF</A></I>
+</TD>
+<TD WIDTH="100%" STYLE="border-top:none;">&nbsp;</TD>
+<TD ALIGN="RIGHT" NOWRAP STYLE="border-top:none;">
+<I><A HREF="getting-started-ru.html">in Russian...</A></I>
+</TD>
+</TR>
+</TABLE>
+
+<CENTER><H1>GETTING STARTED WITH MALAHIT-R1</H1></CENTER>
+<P>
+<B><I>Malahit-R1</I></B> is a portable SDR receiver that uses your 
+mobile device, like a smartphone, for display and controls. The radio 
+itself can be placed where reception is the best. It will then create a 
+WiFi network, or connect to your existing WiFi network, and provide you 
+with a user interface accessed through a web browser on your mobile 
+device. The software inside <I>Malahit-R1</I> is based on the 
+open-source
+<A HREF="https://fms.komkon.org/OWRX/"><I>OpenWebRX+</I></A> project, 
+while the proprietary hardware is developed by
+<A HREF="https://malahiteam.com/"><I>Malahiteam</I></A>.
+</P>
+
+<CENTER><H2>THINGS YOU NEED</H2></CENTER>
+<P>
+<B>You will need the following items</B> to get started with your 
+<I>Malahit-R1</I> remote SDR receiver:
+</P>
+
+<OL>
+<LI><P>
+<B>A smartphone, a tablet, or a computer</B> that will serve as display 
+and control unit. Any device that runs a fairly recent web browser will 
+do.
+</P>
+<LI><P>
+<B>Four 18650 rechargeable batteries</B> that will go inside the 
+receiver. You can use fewer batteries if you like (they are all 
+connected in parallel), but fewer batteries will obviously hold less 
+power.
+</P>
+<LI><P>
+<B>A laptop power supply</B> with the USB-C connector, to charge 
+batteries. Any power supply that supports PD standard should work. Less 
+powerful QC power supplies are also compatible, but may not be able to 
+run the receiver and charge it at the same time.
+</P>
+<LI><P>
+<B>Three meters of wire</B> for the loop antenna. By default, the 
+receiver is configured to use a loop antenna for the best performance in 
+urban areas. It also supports other antennas though, including a 
+telescopic one.
+</P>
+</OL>
+
+<CENTER><H2>SETTING THINGS UP</H2></CENTER>
+<P>
+Once you have the above items, <B>follow the steps outlined below:</B>
+</P>
+
+<OL>
+<LI><P>
+Carefully unscrew and remove end covers, then open the receiver case. 
+<B>Install your 18650 batteries</B> into the battery holder. Make sure 
+you observe the correct polarity. Inserting batteries in the opposite 
+polarity may damage the receiver. Close the receiver case and screw back 
+the end covers.
+</P>
+<LI><P>
+<B>Bend your antenna wire into a loop</B> and attach its bare ends to 
+the pair of terminal posts found on the receiver. Move your receiver 
+close to a window, with the loop antenna standing up against that 
+window.
+</P>
+<LI><P>
+<B>Use power supply</B> to plug your receiver into a power outlet. Then 
+press and release the POWER button and wait for 15-30 seconds for the 
+receiver to start.
+</P>
+<LI><P>
+On your smartphone, table, or computer, look at the available WiFi
+networks and <B>connect to the network</B> listed below:
+</P>
+<PRE>
+network:  <B>malahit-r1</B>
+password: <B>malahit-r1</B>
+</PRE>
+<LI><P>
+Open a web browser of your choice and <B>go to the following web 
+address</B>:
+</P>
+<B><PRE>http://192.168.10.1:8073/</PRE></B>
+<P>
+When the <I>Malahit-R1</I> web user interface loads, press the large 
+arrow button, and start listening to the receiver. <B>You are all 
+set!</B>
+</P>
+</OL>
+
+<CENTER><H2>NEXT STEPS</H2></CENTER>
+<P>
+Once you have your <I>Malahit-R1</I> running, please, <B>go through the
+following steps in order to finish setting up your receiver:</B>
+</P>
+
+<OL>
+<LI><P>
+Click on the <I>"Settings"</I> icon at the top-right corner of the web 
+user interface. Then log into Settings by entering the following 
+credentials:
+</P>
+<PRE>
+name:     <B>admin</B>
+password: <B>malahit-r1</B>
+</PRE>
+<LI><P>
+Click on <I>"General Settings"</I>, go to the bottom of the page, and 
+<B>change your admin password</B> to something only you will know.
+</P>
+<LI><P>
+While at the <I>"General Settings"</I> page, you can also set up your
+receiver name, geographic location, the ITU region and country you
+are in, and other settings.
+</P>
+<LI><P>
+Once done with the <I>"General Settings"</I> page, click on <I>"Apply 
+and Save"</I> to save the new password and other settings.
+</P>
+<LI><P>
+Go back to the main Settings page, click on <I>"WiFi Setup"</I>, and 
+<B>enter the name and password for your local WiFi network</B>. You can 
+have up to four different WiFi networks configured in the <I>"WiFi 
+Setup"</I>.
+</P>
+<LI><P>
+While at the <I>"WiFi Setup"</I> page, you can also <B>change the name 
+and password of the internal WiFi network</B> that gets activated when
+<I>Malahit-R1</I> cannot connect to any existing WiFi networks.
+</P>
+<LI><P>
+Once done with the <I>"WiFi Setup"</I> page, click on <I>"Apply and 
+Save"</I> to save the new WiFi setup.
+</P>
+<LI><P>
+Click on the <I>"Help"</I> icon at the top of the web user interface to 
+read the
+<A HREF="https://fms.komkon.org/OWRX/">rest of the documentation</A>
+and find out what else you can do with your <I>Malahit-R1</I> SDR 
+receiver!
+</P>
+
+</OL>
+
+<CENTER><H2>UPDATING SOFTWARE</H2></CENTER>
+<P>
+<I>Malahit-R1</I> runs Debian Linux and thus can be updated as any other 
+Debian Linux device, by using <I>APT</I>. In order to update 
+<I>Malahit-R1</I> software, follow these steps:
+</P>
+
+<OL>
+<LI><P>
+Connect your receiver to a local network using WiFi.
+</P>
+<LI><P>
+From another computer on the same local network, log into your receiver 
+using SSH. Use the following credentials:
+</P>
+<PRE>
+name:     <B>malahit</B>
+password: <B>malahit-r1</B>
+</PRE>
+<LI><P>
+Once logged in, make sure you <B>change the password</B> to something 
+only you will know by typing this command:
+</P>
+<PRE><B>passwd</B></PRE>
+<LI><P>
+Obtain the list of the latest software packages by typing this command:
+</P>
+<PRE><B>sudo apt update</B></PRE>
+<LI><P>
+Upgrade your software to the latest versions by typing this command:
+</P>
+<PRE><B>sudo apt upgrade</B></PRE>
+<LI><P>
+Disconnect from the receiver by typing this command:
+</P>
+<PRE><B>exit</B></PRE>
+<LI><P>
+<B>If things go horribly wrong</B> for whatever reason, you can always
+download a fresh SD card image from the <I>Malahit</I> web site and
+rewrite your entire SD card with it, resetting the receiver to its
+factory settings.
+</P>
+
+</OL>
+
+<HR>
+<I>&copy;2026 Marat Fayzullin</I>
+</BODY>
+</HTML>
