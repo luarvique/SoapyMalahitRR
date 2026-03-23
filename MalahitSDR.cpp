@@ -73,10 +73,17 @@ bool MalahitSDR::reportBattery(size_t samples)
   leds = (leds ^ ~LED_2) | (!charger && (charge < 15)? LED_2:0);
 
   // Save STM chip ID and firmware version to a file
-  f = fopen(idPipeName, "wb");
+  f = fopen(idPipeName, "ab");
   if(f)
   {
-    fprintf(f, "%s %.2f\n", id, ver / 100.0f);
+    // Limit file size to 16kB
+    if(ftell(f) < 0x4000)
+    {
+      id[4] = id[9] = id[14] = id[19] = id[24] = '\0';
+      fprintf(f, "{ 0x%s, 0x%s, 0x%s, 0x%s, 0x%s, 0x%s }, // %.2f\n",
+        id, id + 5, id + 10, id + 15, id + 20, id + 25, ver / 100.0f
+      );
+    }
     fclose(f);
   }
 
@@ -95,13 +102,16 @@ bool MalahitSDR::reportBattery(size_t samples)
 bool MalahitSDR::updateRadio()
 {
   // Apply frequency correction
-  unsigned int frequency = curFrequency * (1.0 + curFreqCorrection / 1000000.0);
+  unsigned int freq = curFrequency * (1.0 + curFreqCorrection / 1000000.0);
+
+  // Check if we need to swap IQ stream components
+  swapIq = (freq > 108000000) || ((freq > 30000000) && (freq < 65000000));
 
   fprintf(stderr, "updateRadio(): Rate=%dHz, Freq=%dHz, SW=0x%X, ATT=%d\n",
-    sampleRate, frequency, switches, attenuator
+    sampleRate, freq, switches, attenuator
   );
 
-  return(stmDevice.update(sampleRate, frequency, switches, attenuator, gain));
+  return(stmDevice.update(sampleRate, freq, switches, attenuator, gain));
 }
 
 /*******************************************************************
@@ -222,7 +232,18 @@ int MalahitSDR::readStream(SoapySDR::Stream *stream, void * const *buffs, const 
 
   // Read data from the ALSA device
   ALSA *device = reinterpret_cast<ALSA *>(stream);
-  return(device->read(buffs[0], numElems/16));
+  int result = device->read(buffs[0], numElems >> 4);
+
+  // Swap IQ stream components if necessary
+  if(swapIq)
+  {
+    unsigned int *p = (unsigned int *)(buffs[0]);
+    for(int j = 0 ; j < result ; ++j)
+      p[j] = (p[j] >> 16) | (p[j] << 16);
+  }
+
+  // Done
+  return(result);
 }
 
 /*******************************************************************

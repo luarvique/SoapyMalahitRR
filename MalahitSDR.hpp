@@ -226,7 +226,7 @@ class MalahitSDR : public SoapySDR::Device
       // Current frequency in Hz.
     double curFreqCorrection = 0.0;
       // Current frequency correction in PPM.
-    unsigned int gain = 63;
+    unsigned int gain = 0;
       // Current gain level.
     unsigned int attenuator = 0;
       // Current attenuation level.
@@ -234,6 +234,8 @@ class MalahitSDR : public SoapySDR::Device
       // Current GPIO switch states.
     unsigned int leds = LED_1;
       // Current LED states.
+    bool swapIq = false;
+      // TRUE: Swap IQ components.
 
     bool updateRadio();
       // Send configuration to the radio chips
