@@ -72,14 +72,6 @@ bool MalahitSDR::reportBattery(size_t samples)
   // Light up a LED when the charge is too low
   leds = (leds ^ ~LED_2) | (!charger && (charge < 15)? LED_2:0);
 
-  // Save STM chip ID and firmware version to a file
-  f = fopen(idPipeName, "wb");
-  if(f)
-  {
-    fprintf(f, "%s %.2f\n", id, ver / 100.0f);
-    fclose(f);
-  }
-
   // This file will be used to report battery status
   f = fopen(statusPipeName, "wb");
   if(!f) return(false);

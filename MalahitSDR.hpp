@@ -202,7 +202,6 @@ class MalahitSDR : public SoapySDR::Device
 
   private:
     const char *statusPipeName = "/tmp/battery";
-    const char *idPipeName = "/tmp/stm-id";
     const char *alsaDeviceName = "default";
     const unsigned int minFrequency = 150000;
     const unsigned int maxFrequency = 1766000000;
