@@ -73,17 +73,10 @@ bool MalahitSDR::reportBattery(size_t samples)
   leds = (leds ^ ~LED_2) | (!charger && (charge < 15)? LED_2:0);
 
   // Save STM chip ID and firmware version to a file
-  f = fopen(idPipeName, "ab");
+  f = fopen(idPipeName, "wb");
   if(f)
   {
-    // Limit file size to 16kB
-    if(ftell(f) < 0x4000)
-    {
-      id[4] = id[9] = id[14] = id[19] = id[24] = '\0';
-      fprintf(f, "{ 0x%s, 0x%s, 0x%s, 0x%s, 0x%s, 0x%s }, // %.2f\n",
-        id, id + 5, id + 10, id + 15, id + 20, id + 25, ver / 100.0f
-      );
-    }
+    fprintf(f, "%s %.2f\n", id, ver / 100.0f);
     fclose(f);
   }
 
