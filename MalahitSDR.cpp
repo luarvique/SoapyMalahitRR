@@ -402,7 +402,7 @@ void MalahitSDR::setFrequency(const int direction, const size_t channel, const d
 void MalahitSDR::setFrequency(const int direction, const size_t channel, const std::string &name, const double frequency, const SoapySDR::Kwargs &args)
 {
   // If frequency changes...
-  if(frequency != curFrequency)
+  if((frequency >= MIN_FREQUENCY) && (frequency <= MAX_FREQUENCY) && (frequency != curFrequency))
   {
     // New frequency now in effect
     curFrequency = frequency;

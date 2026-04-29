@@ -11,6 +11,9 @@
 class MalahitSDR : public SoapySDR::Device
 {
   public:
+    static const unsigned int MIN_FREQUENCY = 150000;
+    static const unsigned int MAX_FREQUENCY = 1700000;
+
     static const unsigned int SW_HIGHZ  = 0x0004;
     static const unsigned int SW_PREAMP = 0x0008;
     static const unsigned int SW_BIAST  = 0x0001;
