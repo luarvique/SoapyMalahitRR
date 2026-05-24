@@ -220,7 +220,7 @@
     "magic_key": "",
     "receiver_keys": [],
     "waterfall_scheme": "ZoranWaterfall",
-    "fft_fps": 16,
+    "fft_fps": 10,
     "fft_size": 8192,
     "fft_voverlap_factor": 0.3,
     "waterfall_levels": {
@@ -233,7 +233,7 @@
     },
     "waterfall_auto_level_default_mode": true,
     "waterfall_auto_min_range": 50,
-    "audio_compression": "none",
+    "audio_compression": "adpcm",
     "fft_compression": "adpcm",
     "tuning_precision": 0,
     "eibi_bookmarks_range": 0,
