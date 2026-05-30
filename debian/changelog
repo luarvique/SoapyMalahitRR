@@ -1,3 +1,11 @@
+soapy-malahit-rr (0.8.6) stable; urgency=low
+
+  * Fixed LEDs operation.
+  * Fixed battery queries.
+  * Removed unnecessary code.
+
+ -- Marat Fayzullin <luarvique@gmail.com>  Mon, 06 Apr 2026 12:18:02 -0000
+
 soapy-malahit-rr (0.8.5) stable; urgency=low
 
   * New firmware v1.06.

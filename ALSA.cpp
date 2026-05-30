@@ -8,7 +8,6 @@ void ALSA::close()
 
 bool ALSA::open(const char *deviceName, unsigned int rate, unsigned int bufferSize, unsigned int periodSize)
 {
-  snd_pcm_info_t *info;
   snd_pcm_hw_params_t *hwParams;
   snd_pcm_sw_params_t *swParams;
   snd_output_t *log;
@@ -22,7 +21,6 @@ bool ALSA::open(const char *deviceName, unsigned int rate, unsigned int bufferSi
   if((periodSize<=0) || (periodSize>=bufferSize)) periodSize = bufferSize/2;
 
   // Allocate ALSA data structures on stack
-  snd_pcm_info_alloca(&info);
   snd_pcm_hw_params_alloca(&hwParams);
   snd_pcm_sw_params_alloca(&swParams);
 
@@ -40,12 +38,14 @@ bool ALSA::open(const char *deviceName, unsigned int rate, unsigned int bufferSi
     return(false);
   }
 
-  if((res = snd_pcm_info(handle, info)) < 0)
-  {
-    fprintf(stderr, "ALSA::open(): snd_pcm_info() error: %s\n", snd_strerror(res));
-    snd_pcm_close(handle);
-    return(false);
-  }
+//  snd_pcm_info_t *info;
+//  snd_pcm_info_alloca(&info);
+//  if((res = snd_pcm_info(handle, info)) < 0)
+//  {
+//    fprintf(stderr, "ALSA::open(): snd_pcm_info() error: %s\n", snd_strerror(res));
+//    snd_pcm_close(handle);
+//    return(false);
+//  }
 
   // Making device non-blocking (necessary ???)
 //  if((res = snd_pcm_nonblock(handle, 1)) < 0)

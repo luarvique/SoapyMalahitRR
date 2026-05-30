@@ -26,6 +26,8 @@ MalahitSDR::MalahitSDR()
   stmDevice.updateFirmware("/usr/share/malahit/" CURRENT_FIRMWARE);
   // Start STM receiver
   stmDevice.go();
+  // Initialize LEDs
+  stmDevice.leds(leds);
   // Update hardware with initial settings
   updateRadio();
 }
@@ -38,10 +40,10 @@ MalahitSDR::~MalahitSDR()
 
 bool MalahitSDR::blinkLEDs(size_t samples)
 {
-  // Do not blink until accumulated enough time (1 second)
+  // Do not blink until accumulated enough time (1/2 second)
   ledCount += samples;
-  if(ledCount<sampleRate*10) return(true);
-  ledCount = 0;
+  if(ledCount<sampleRate/2) return(true);
+  ledCount %= sampleRate/2;
 
   // Invert leds for now
   leds ^= LED_1;
@@ -56,10 +58,10 @@ bool MalahitSDR::reportBattery(size_t samples)
   bool charger;
   FILE *f;
 
-  // Do not report until accumulated enough time (10+ seconds)
+  // Do not report until accumulated enough time (15 seconds)
   statusCount += samples;
-  if(statusCount<sampleRate*10) return(true);
-  statusCount = 0;
+  if(statusCount<sampleRate*15) return(true);
+  statusCount %= sampleRate*15;
 
   // Get STM status
   char id[32], ch;
@@ -176,6 +178,9 @@ void MalahitSDR::closeStream(SoapySDR::Stream *stream)
 {
   std::lock_guard <std::mutex> lock(mutex);
 
+  // Turn blinking LED off, keep power LED
+  stmDevice.leds(leds & LED_2);
+
   // Close ALSA device
   (reinterpret_cast<ALSA *>(stream))->close();
 }
@@ -190,6 +195,11 @@ int MalahitSDR::activateStream(SoapySDR::Stream *stream, const int flags, const 
 {
   std::lock_guard <std::mutex> lock(mutex);
 
+  // Next readStream() turns activity led on, but delay power check
+  ledCount = sampleRate;
+  statusCount = 0;
+  leds = 0;
+
   // Open ALSA device
   ALSA *device = reinterpret_cast<ALSA *>(stream);
   return(device->open(alsaDeviceName, sampleRate, chunkCount * chunkSize, chunkSize)? 0 : -1);
@@ -198,6 +208,9 @@ int MalahitSDR::activateStream(SoapySDR::Stream *stream, const int flags, const 
 int MalahitSDR::deactivateStream(SoapySDR::Stream *stream, const int flags, const long long timeNs)
 {
   std::lock_guard <std::mutex> lock(mutex);
+
+  // Turn blinking LED off, keep power LED
+  stmDevice.leds(leds & LED_2);
 
   // Close ALSA device
   ALSA *device = reinterpret_cast<ALSA *>(stream);
@@ -208,12 +221,6 @@ int MalahitSDR::deactivateStream(SoapySDR::Stream *stream, const int flags, cons
 int MalahitSDR::readStream(SoapySDR::Stream *stream, void * const *buffs, const size_t numElems, int &flags, long long &timeNs, const long timeoutUs)
 {
   std::lock_guard <std::mutex> lock(mutex);
-
-  // Report SW6106 status
-  reportBattery(numElems);
-
-  // Blink LEDs
-  blinkLEDs(numElems);
 
   // Read data from the ALSA device
   ALSA *device = reinterpret_cast<ALSA *>(stream);
@@ -226,6 +233,12 @@ int MalahitSDR::readStream(SoapySDR::Stream *stream, void * const *buffs, const 
     for(int j = 0 ; j < result ; ++j)
       p[j] = (p[j] >> 16) | (p[j] << 16);
   }
+
+  // Report SW6106 status
+  reportBattery(result);
+
+  // Blink LEDs
+  blinkLEDs(result);
 
   // Done
   return(result);
