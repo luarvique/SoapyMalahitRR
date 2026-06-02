@@ -1,3 +1,14 @@
+soapy-malahit-rr (0.8.7) stable; urgency=low
+
+  * New firmware v1.10.
+  * Improved HF bands sensitivity.
+  * Much improved FM band sensitivity.
+  * Fixed issues switching between HF and VHF bands.
+  * Fixed HF frequency correction (PPM) setting.
+  * Fixed issues tuning hardware near 0Hz.
+
+ -- Marat Fayzullin <luarvique@gmail.com>  Wed, 03 Jun 2026 12:18:02 -0000
+
 soapy-malahit-rr (0.8.6) stable; urgency=low
 
   * Fixed LEDs operation.
