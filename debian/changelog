@@ -1,3 +1,11 @@
+soapy-malahit-rr (0.8.8) stable; urgency=low
+
+  * New firmware v1.11.
+  * Enabled fully usable 912kHz bandwidth.
+  * Must have clock governor set to "powersave" to use 912kHz!
+
+ -- Marat Fayzullin <luarvique@gmail.com>  Wed, 22 Jul 2026 12:18:02 -0000
+
 soapy-malahit-rr (0.8.7) stable; urgency=low
 
   * New firmware v1.10.
