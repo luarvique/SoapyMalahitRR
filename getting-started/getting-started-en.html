@@ -127,6 +127,32 @@ When the <I>Malahit-R1</I> web user interface loads, press the large
 arrow button, and start listening to the receiver. <B>You are all 
 set!</B>
 </P>
+<LI><P>
+The <B>meaning of the three lights</B> found at the front panel is as 
+follows:
+</P>
+<UL>
+<LI><P>
+Solid <B><FONT COLOR="green">GREEN</FONT></B> light means that the 
+receiver is ready.
+</P>
+<LI><P>
+Blinking <B><FONT COLOR="green">GREEN</FONT></B> light means that the 
+receiver is active and working normally.
+</P>
+<LI><P>
+Solid <B><FONT COLOR="orange">ORANGE</FONT></B> light means that the
+battery is low (below 10%).
+</P>
+<LI><P>
+Solid <B><FONT COLOR="red">RED</FONT></B> light means that the receiver 
+is charging from a USB PD or a QC power source.
+</P>
+</UL>
+</P>
+<LI><P>
+Finally, <B>to turn the receiver off, press the POWER button twice.</B>
+</P>
 </OL>
 
 <CENTER><H2>NEXT STEPS</H2></CENTER>
@@ -233,6 +259,126 @@ Rewriting your SD card with a freshly downloaded image will reset
 </I>Malahit-R1</I> to the factory settings.
 </P>
 
+</OL>
+
+<CENTER><H2>CHOOSING ANTENNA</H2></CENTER>
+<P>
+<I>Malahit-R1</I> software comes configured to be used with a plain wire 
+loop connected to the terminal posts on the receiver. It can be 
+configured to be used with a variety of other antennas, as described 
+below.
+</P>
+
+<H3>TELESCOPIC ANTENNAS</H3>
+<P>
+A short telescopic antenna can be plugged directly into the SMA 
+connector on top of the receiver. To make <I>Malahit-R1</I> use this 
+telescopic antenna, go to the <I>"Settings | SDR Device Settings | 
+Malahit"</I> page and do the following:
+</P>
+<OL>
+<LI><P>
+Enter "Antenna" into the <I>"Antenna"</I> input field.
+</P>
+<LI><P>
+Enable the <I>"High-impedance antenna input"</I> option. Since short 
+telescopic antennas are generally not resonant at HF frequencies, this 
+option will help at HF. It will get automatically disabled at VHF and 
+UHF bands.
+</P>
+<LI><P>
+Enable the <I>"Low-noise amplifier (LNA)"</I> option if you need to 
+boost signal further. Disable this option if you are experiencing
+wideband distortions due to overload.
+</P>
+</OL>
+
+<H3>RESONANT ANTENNAS</H3>
+<P>
+If you are using a long, resonant HF antenna or a resonant VHF / UHF 
+antenna, connect it to the SMA connector on top of the receiver, then go 
+to the <I>"Settings | SDR Device Settings | Malahit"</I> page and do the 
+following:
+</P>
+<OL>
+<LI><P>
+Enter "Antenna" into the <I>"Antenna"</I> input field.
+</P>
+<LI><P>
+Disable the <I>"High-impedance antenna input"</I> option.
+</P>
+<LI><P>
+Only enable the <I>"Low-noise amplifier (LNA)"</I> option if you
+are absolutely sure you need more boost. Most resonant antennas
+should not require this option.
+</P>
+</OL>
+
+<H3>ACTIVE ANTENNAS</H3>
+<P>
+If you are using an active antenna, such as active loop or miniwhip, 
+connect it to the SMA connector on top of the receiver, then go to the 
+<I>"Settings | SDR Device Settings | Malahit"</I> page and do the 
+following:
+</P>
+<OL>
+<LI><P>
+Enter "Antenna" into the <I>"Antenna"</I> input field.
+</P>
+<LI><P>
+Disable the <I>"High-impedance antenna input"</I> option.
+</P>
+<LI><P>
+Only enable the <I>"Low-noise amplifier (LNA)"</I> option if you
+are absolutely sure you need more boost. Since active antennas have
+their own LNAs, they should not require this option.
+</P>
+<LI><P>
+If your antenna requires external Bias-T power source, enable the 
+<I>"Bias-Tee power supply"</I> option. If your antenna comes with its 
+own power source, make sure this option is disabled.
+</P>
+</OL>
+
+<H3>LOOP ANTENNAS</H3>
+<P>
+If your loop antenna has its own balun, connect it to the SMA connector 
+on top of your receiver and treat it as a regular antenna. If you do not 
+have a balun, connect your loop wire to the terminal posts on the 
+receiver, then go to the <I>"Settings | SDR Device Settings | 
+Malahit"</I> page and do the following:
+</P>
+<OL>
+<LI><P>
+For plain wires, enter "Loop" into the <I>"Antenna"</I> input field.
+If your loop already has its own balun, enter "Antenna".
+</P>
+<LI><P>
+Disable the <I>"High-impedance antenna input"</I> option.
+</P>
+<LI><P>
+Enable the <I>"Low-noise amplifier (LNA)"</I> option, since passive 
+magnetic loops always require amplification.
+</P>
+</OL>
+
+<H3>DIPOLE ANTENNAS</H3>
+<P>
+In order to use a dipole, connect its shoulders to the terminal posts on 
+the receiver, then go to the <I>"Settings | SDR Device Settings | 
+Malahit"</I> page and do the following:
+</P>
+<OL>
+<LI><P>
+Enter "Loop" into the <I>"Antenna"</I> input field.
+</P>
+<LI><P>
+Disable the <I>"High-impedance antenna input"</I> option.
+</P>
+<LI><P>
+Only enable the <I>"Low-noise amplifier (LNA)"</I> option if your dipole 
+is too short for the chosen band and thus needs more boost.
+</P>
 </OL>
 
 <HR>
