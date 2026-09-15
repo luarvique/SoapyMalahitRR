@@ -5,12 +5,15 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-#ifdef ALLWINNER
+#if defined(ALLWINNER)
 #define GPIOD_RST_LINE     262
 #define GPIOD_BUSY_LINE    256
+#elif defined(ROCKCHIP)
+#define GPIOD_RST_LINE     17
+#define GPIOD_BUSY_LINE    11
 #else
 #define GPIOD_RST_LINE     25
-#define GPIOD_BUSY_LINE     5
+#define GPIOD_BUSY_LINE    5
 #endif
 
 void GPIO::uninitialize()

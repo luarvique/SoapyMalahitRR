@@ -10,10 +10,11 @@ class STM: public SPI
   public:
     static const unsigned int FIRMWARE_SIZE = 0x200000;
     static const unsigned int FIRMWARE_STEP = 0x800;
+    static const char *DEFAULT_GPIO;
     static const char *DEFAULT_SPI;
 
-    STM(const char *deviceName = DEFAULT_SPI, unsigned int speed = 10000000)
-    { open(deviceName, speed); }
+    STM(const char *deviceName = DEFAULT_SPI, const char *gpioName = DEFAULT_GPIO, unsigned int speed = 10000000)
+    : gpio(DEFAULT_GPIO) { open(deviceName, speed); }
 
     ~STM() { close(); }
 

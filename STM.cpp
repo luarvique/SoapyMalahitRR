@@ -5,10 +5,15 @@
 #include <stdio.h>
 #include <ctype.h>
 
-#ifdef ALLWINNER
-const char *STM::DEFAULT_SPI = "/dev/spidev1.0";
+#if defined(ALLWINNER)
+const char *STM::DEFAULT_SPI  = "/dev/spidev1.0";
+const char *STM::DEFAULT_GPIO = "gpiochip0";
+#elif defined(ROCKCHIP)
+const char *STM::DEFAULT_SPI  = "/dev/spidev3.0";
+const char *STM::DEFAULT_GPIO = "gpiochip3";
 #else
-const char *STM::DEFAULT_SPI = "/dev/spidev0.0";
+const char *STM::DEFAULT_SPI  = "/dev/spidev0.0";
+const char *STM::DEFAULT_GPIO = "gpiochip0";
 #endif
 
 bool STM::reset() const
