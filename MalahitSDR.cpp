@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 #include <math.h>
 
 static const unsigned int sampleRates[] =
@@ -22,6 +23,8 @@ MalahitSDR::MalahitSDR()
 {
   // Hard-reset attached hardware
   stmDevice.reset();
+  // Wait for hardware to come about
+  usleep(100000);
   // Check firmware and update as necessary
   stmDevice.updateFirmware("/usr/share/malahit/" CURRENT_FIRMWARE);
   // Start STM receiver
